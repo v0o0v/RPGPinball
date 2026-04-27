@@ -80,3 +80,5 @@ crashlytics-build.properties
 # Rider
 .idea/
 # End of https://www.toptal.com/developers/gitignore/api/unity
+
+/GeneratedAssets
