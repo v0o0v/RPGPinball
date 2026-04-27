@@ -19,6 +19,14 @@ namespace RPGPinball.Core
             }
         }
 
-        // Add game state, score tracking here
+        public int Score { get; private set; }
+        public System.Action<int> OnScoreChanged;
+
+        public void AddScore(int amount)
+        {
+            Score += amount;
+            Debug.Log($"Score Added: {amount}. Total Score: {Score}");
+            OnScoreChanged?.Invoke(Score);
+        }
     }
 }

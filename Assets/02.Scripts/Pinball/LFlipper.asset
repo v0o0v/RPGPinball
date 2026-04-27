@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LFlipper
   m_EditorClassIdentifier: Assembly-CSharp::RPGPinball.Pinball.FlipperData
   mass: 20
-  hitForce: 15000
+  hitForce: 30000
   maxMotorTorque: 50000
   lowerAngle: -45
   upperAngle: 0
