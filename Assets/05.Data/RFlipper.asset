@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 760afd0e7b1539441afd73a360275c4f, type: 3}
-  m_Name: LFlipper
+  m_Name: RFlipper
   m_EditorClassIdentifier: Assembly-CSharp::RPGPinball.Pinball.FlipperData
   mass: 20
-  hitForce: 30000
-  maxMotorTorque: 50000
-  lowerAngle: -45
-  upperAngle: 0
+  hitForce: -30000
+  maxMotorTorque: 100000
+  kickForce: 15
+  lowerAngle: 0
+  upperAngle: 60

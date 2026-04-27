@@ -45,14 +45,14 @@ namespace RPGPinball.Pinball
         private void OnEnable()
         {
             flipperAction.Enable();
-            flipperAction.started += OnFlipperPressed;
+            flipperAction.performed += OnFlipperPressed;
             flipperAction.canceled += OnFlipperReleased;
         }
 
         private void OnDisable()
         {
             flipperAction.Disable();
-            flipperAction.started -= OnFlipperPressed;
+            flipperAction.performed -= OnFlipperPressed;
             flipperAction.canceled -= OnFlipperReleased;
         }
 
@@ -71,5 +71,30 @@ namespace RPGPinball.Pinball
             hinge.motor = motor;
             hinge.useMotor = true;
         }
-    }
-}
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Ball"))
+            {
+                float targetHitSpeed = flipperData != null ? -flipperData.hitForce : -10000f;
+                
+                // If motor is currently trying to flip UP
+                if (hinge.useMotor && Mathf.Approximately(motor.motorSpeed, targetHitSpeed))
+                {
+                    Rigidbody2D ballRb = collision.gameObject.GetComponent<Rigidbody2D>();
+                    if (ballRb != null && flipperData != null)
+                    {
+                        // Apply extra impulse in the direction the flipper is facing (usually 'up' for a flipper sprite)
+                        Vector2 hitDir = transform.up;
+                        ballRb.AddForce(hitDir * flipperData.kickForce, ForceMode2D.Impulse);
+                        
+                        // Also slightly increase the ball's velocity based on how far it is from the pivot
+                        // to simulate the tip of the flipper moving faster.
+                        float distanceToPivot = Vector2.Distance(collision.GetContact(0).point, transform.position);
+                        ballRb.AddForce(hitDir * distanceToPivot * (flipperData.kickForce * 0.5f), ForceMode2D.Impulse);
+                    }
+                }
+            }
+        }
+        }
+        }

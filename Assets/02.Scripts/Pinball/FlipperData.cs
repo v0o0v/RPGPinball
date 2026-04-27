@@ -15,6 +15,9 @@ namespace RPGPinball.Pinball
         [Tooltip("모터 최대 힘 (공의 무게를 밀어낼 힘, 10000 이상 추천)")]
         public float maxMotorTorque = 10000f;
 
+        [Tooltip("충돌 시 공에 가해지는 추가 순간 힘")]
+        public float kickForce = 5f;
+
         [Header("Angle Limits")]
         public float lowerAngle = -10f;
         public float upperAngle = 45f;

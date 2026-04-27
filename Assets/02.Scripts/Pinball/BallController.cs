@@ -6,7 +6,7 @@ namespace RPGPinball.Pinball
     public class BallController : MonoBehaviour
     {
         private Rigidbody2D rb;
-        [SerializeField] private float maxSpeed = 20f;
+        [SerializeField] private float maxSpeed = 100f;
 
         private void Awake()
         {
