@@ -1,0 +1,9 @@
+=== Unity Scene Diagnostic Result ===
+Active Scene: Stage_Test
+1. Camera Check: Main Camera FOUND.
+   - Component: Transform
+   - Component: Camera
+   => [WARNING] No tracking script found on Camera!
+2. FlipperManager Check: FOUND.
+   - invalidSpawnLayers.intValue = 1
+   => [WARNING] invalidSpawnLayers includes Default layer! This blocks spawn on empty background.
