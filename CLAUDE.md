@@ -15,8 +15,9 @@ Assets/
 ├── 01.Scenes/              현재 Sample.unity 하나만 존재 (Title/Village/ActMap/Stage는 미생성)
 ├── 02.Scripts/             게임 코드. 현재 Core / Pinball / RPG 3개 폴더만 존재
 ├── 03.Sprites/, 03.Textures/, 04.Data/, 05.Prefabs/, 06.Materials/
-├── 50. Extenal Assets/     서드파티(ProCamera2D 등). 디렉토리명 오타 그대로 유지
-├── Editor/, Plugins/, Resources/, Settings/, TextMesh Pro/, UI Toolkit/
+├── 50. External Assets/    ProCamera2D, kenney_toy-brick-pack 등 서드파티 임포트
+├── Plugins/Demigiant/      DOTween + DOTween Pro (Asset Store 임포트, UPM 아님)
+├── Editor/, Resources/, Settings/, TextMesh Pro/, UI Toolkit/
 Design/                     13개 한국어 게임 설계 문서 (소스 오브 트루스)
 Implementation/             Implementation_Plan.md — 8개 마일스톤 로드맵
 GeneratedAssets/             gitignore됨 (AI 생성 임시 에셋용)
@@ -77,14 +78,12 @@ Unity 프로젝트이며 별도 CLI 빌드 스크립트 없음:
 
 ## 의존성 메모
 
-`Packages/manifest.json`에 현재 명시된 패키지:
-- Unity 2D 풀세트, Universal RP 17.4.0, Input System 1.19.0, Unity Purchasing(IAP), Visual Scripting, AI Inference/Assistant.
-- **DOTween, UniTask는 매니페스트에 아직 없음** — `Implementation_Plan.md`상 추가 예정이나 미반영. 트윈/비동기 코드 추가 시 먼저 패키지 도입 여부 확인.
-- ProCamera2D는 Unity Package가 아닌 `Assets/50. Extenal Assets/ProCamera2D/`에 직접 포함된 서드파티 에셋(편집 금지).
+- **`Packages/manifest.json`** (UPM): Unity 2D 풀세트, Universal RP 17.4.0, Input System 1.19.0, Unity Purchasing(IAP), Visual Scripting, AI Inference/Assistant. **UniTask**는 `com.cysharp.unitask` Git URL로 등록(`Cysharp/UniTask` 마스터).
+- **`Assets/Plugins/Demigiant/`**: **DOTween + DOTween Pro** (Asset Store 직접 임포트). UPM 패키지가 아니므로 매니페스트에는 없음. 트윈 코드는 `using DG.Tweening;`으로 사용.
+- **`Assets/50. External Assets/`**: ProCamera2D, kenney_toy-brick-pack. UPM 외부 임포트, 편집 금지.
 
 ## 작업 시 주의
 
 - **문서 작성 언어**: 새/수정되는 모든 마크다운/주석 문서는 한국어. 식별자(클래스/메서드/변수)는 영문 유지.
-- **외부 에셋 디렉토리 오타**: `Assets/50. Extenal Assets/` (Extern**a**l이 아닌 **Extenal**) — 의도된 것은 아니지만 메타파일/가이드와 묶여 있으므로 이름 변경 금지.
 - **보안 시스템 미구현**: 계획서의 `SafeInt`/`SafeFloat`/AES-256 저장 등은 아직 없음. 점수/HP/골드 같은 민감 수치를 추가할 때 일반 `int`로 두면 추후 `SafeInt`로 일괄 교체 대상이 됨을 인지.
 - **씬 의존성**: 현재 유일한 씬 `Sample.unity`는 프로토타입 검증용. 새 시스템 검증은 가급적 Sample을 복제해 진행하고, 본격 씬(`Title`, `Village`, `ActMap`, `Stage`)은 마일스톤 7에서 정식 생성될 예정.
