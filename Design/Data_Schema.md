@@ -88,10 +88,20 @@ Unity 구현 시 저장/로드에 사용되는 데이터 구조를 정의합니�
 ```json
 {
   "coreId": "acceleration_core",
+  "coreGrade": "rare",
   "coreLevel": 1,
-  "fragments": 2
+  "fragments": 2,
+  "isMain": false
 }
 ```
+
+| 필드 | 타입 | 설명 |
+|---|---|---|
+| coreId | string | 코어 종류 식별자 (예: `acceleration_core`, `guardian_core`) |
+| coreGrade | enum: `"normal"` / `"rare"` / `"epic"` / `"legendary"` | 코어 등급. 등급별 기본 효과 배율 차등 (`Game_Design_Spec.md` §3 대장간 참조) |
+| coreLevel | int (1~10) | 강화 레벨. fragments 누적 시 자동 강화 |
+| fragments | int | 보유 조각 수. 다음 레벨 강화에 사용 |
+| isMain | bool | 메인 슬롯 장착 여부 (true=메인 100% 효율, false=보조 50% 효율) |
 
 ### 룬 아이템 구조
 
@@ -379,6 +389,24 @@ resistLevel은 deathCount 기반 자동 계산:
   "continueCount": 0
 }
 ```
+
+### 런타임 필드 설명
+
+| 필드 | 타입 | 설명 |
+|---|---|---|
+| stageId | string | `"act{n}_stage{m}"` 형식. 절차적 생성 + 보스 식별용 |
+| **seed** | int (32bit) | **절차적 스테이지 생성 시드**. 같은 (stageId, seed) 조합은 동일한 노드 맵·기믹 배치·드랍 테이블·웨이브 패턴을 재현. 일일 도전 모드는 날짜 기반 고정 시드 사용. _(상세는 `Procedural_Stage_Gen.md` §9 참조)_ |
+| remainingTimeSec | float | 남은 제한 시간 (180초 기본, 이어하기 시 +30초) |
+| timeRecoveredThisStage | float | 이번 스테이지에서 회복한 누적 시간. 60초 상한 체크용 |
+| manaGauge | int (0~100) | 현재 마나 게이지. 100 고정 최대치 |
+| comboCount | int | 현재 콤보 (3초 내 미타격 시 0, 낙사 시 0 — M-04 무한의 고리 장착 시 낙사 콤보 유지) |
+| ballState.currentMaterial | enum: `"wood"` / `"steel"` / `"mithril"` / `"volcanic"` | 현재 장착된 공 재질 (스테이지 중 변경 불가, 마을에서만 교체) |
+| **ballState.activeTransformation** | enum: `null` / `"fireball"` / `"iceball"` / `"thunderball"` / `"giantball"` 등 | **A전환 스킬(파이어볼/아이스 폼/썬더볼/자이언트 볼 등)에 의한 일시적 공 변신 상태**. 재질 변신이 아닌 **속성·형태 오버레이**. 지속시간 만료 시 null로 복귀, 변신 중에도 currentMaterial은 유지(데미지 계산은 두 값 모두 적용). _(스킬 목록은 `Active_Skill_Judgment.md` 참조)_ |
+| ballState.transformRemainingTime | float | activeTransformation 남은 지속시간 (초). null일 때 0 |
+| skillCooldowns | float[4] | 스킬 덱 4슬롯의 남은 쿨타임 (초). 0이면 사용 가능 |
+| consumablesRemaining | int[2] | 소모품 슬롯 2칸의 남은 사용 횟수 |
+| stageGrade | enum: `"S"` / `"A"` / `"B"` / `"C"` / null | 현재 예상 등급 (남은 시간 비율 기반 실시간 갱신, 이어하기 사용 시 C 상한) |
+| continueCount | int (0~1) | 이번 스테이지에서 사용한 이어하기 횟수 (스테이지당 1회 제한) |
 
 ---
 
