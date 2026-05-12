@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using RPGPinball.Combat;
 using RPGPinball.Core;
 
 namespace RPGPinball.Physics
@@ -8,6 +9,7 @@ namespace RPGPinball.Physics
     /// <summary>
     /// 터치 입력을 받아 플리퍼를 소환·유지·소멸시킨다.
     /// 쿨타임, 소환 불가 영역, 블로킹 보너스를 처리한다.
+    /// 마일스톤 3: SkillTreeManager의 쿨감 패시브 적용 + 존 오브 컨트롤 오버라이드.
     /// </summary>
     public class FlipperController : MonoBehaviour
     {
@@ -22,6 +24,8 @@ namespace RPGPinball.Physics
         private InputAction touchPressAction;
         private InputAction touchPositionAction;
         private float cooldown;
+        private float cooldownOverride = -1f; // 0 이상이면 오버라이드 사용 (존 오브 컨트롤)
+        private bool unlimitedStack;
         private readonly List<FlipperInstance> active = new();
 
         private void Awake()
@@ -87,9 +91,32 @@ namespace RPGPinball.Physics
             if (flipper != null) flipper.InitializeSwing(pos.x < 0f);
 
             active.Add(new FlipperInstance(go));
-            cooldown = Constants.FlipperCooldown;
+            cooldown = ComputeCooldown();
             EventBus.Publish(new OnFlipperSpawned { Position = pos });
         }
+
+        private float ComputeCooldown()
+        {
+            // 존 오브 컨트롤 오버라이드 (0 가능)
+            if (cooldownOverride >= 0f) return cooldownOverride;
+
+            // SkillTreeManager 쿨감 패시브 + 하드캡 0.5초
+            float mult = SkillTreeManager.Instance != null
+                ? SkillTreeManager.Instance.GetFlipperCooldownMultiplier()
+                : 1f;
+            float computed = Constants.FlipperCooldown * mult;
+            return SkillFormula.HardCapMin(computed, Constants.FlipperCooldownMin);
+        }
+
+        /// <summary>존 오브 컨트롤용. seconds = 0 이면 쿨타임 없음, -1이면 오버라이드 해제.</summary>
+        public void OverrideCooldown(float seconds)
+        {
+            cooldownOverride = seconds;
+            if (seconds <= 0f) cooldown = 0f;
+        }
+
+        /// <summary>존 오브 컨트롤용. 스택 무한 해제.</summary>
+        public void SetUnlimitedStack(bool active) { unlimitedStack = active; }
 
         // ── 소환 가능 여부 ─────────────────────────────────────
 

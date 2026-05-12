@@ -103,5 +103,45 @@ namespace RPGPinball.Core
         // ── 스킬 ────────────────────────────────────────────────
         public const float SkillCastDelay = 0.3f;
         public const int SkillDeckSize = 4;
+
+        // ── 성장 시스템 (Skill_Tree_Formulas.md) ───────────────
+        // 필요 XP = XPBase + level * XPPerLevel + level^2 * XPLevelSquared
+        public const float XPBase = 80f;
+        public const float XPPerLevel = 12f;
+        public const float XPLevelSquared = 0.5f;
+        public const int LevelCap = 100;
+        // 오버레벨링 페널티: 자신 Lv - 적 Lv 차이로 XP 배율 적용
+        public const int OverlevelThreshold1 = 5;
+        public const float OverlevelMul1 = 0.5f;
+        public const int OverlevelThreshold2 = 10;
+        public const float OverlevelMul2 = 0.2f;
+
+        // ── SP 경제 ────────────────────────────────────────────
+        public const int SPPerLevel = 1;
+        public const int SPPerBoss = 1;          // 보스 24마리 → 24 SP
+        public const int SPPerActClear = 5;      // 4액트 × 5 = 20 SP
+        public const int TotalSPGoal = 144;      // 99 + 24 + 20 = 143, 약간의 여유 포함
+
+        // ── 멀티볼 하드캡 ──────────────────────────────────────
+        public const int MultiBallHardCap = 5;
+        public const int MultiBallUltimateCap = 8; // 원소 폭주 발동 시 일시 확장
+
+        // ── A전환 공통 ─────────────────────────────────────────
+        public const int TransformationManaCost = 40;
+        public const float TransformationBaseDuration = 15f;
+        public const float TransformationPerLevelDuration = 2f;
+
+        // ── 궁극기 공통 ────────────────────────────────────────
+        public const int UltimateManaCost = 100;
+        public const float TimeDilationScale = 0.25f;
+
+        // ── 넉백 거리 기본 (스킬별 SO에서 오버라이드 가능) ─────
+        public const float KnockbackDistanceNormal = 1.5f;
+        public const float KnockbackDistanceStrong = 3.0f;
+        public const float KnockbackDistanceUltimate = 5.0f;
+        public const float KnockbackDuration = 0.3f;
+
+        // ── 점감 기본 계수 (참고값, 각 스킬 SO에서 개별 지정) ──
+        public const float DiminishRateDefault = 0.95f;
     }
 }

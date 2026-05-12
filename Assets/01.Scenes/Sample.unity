@@ -404,6 +404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Combat.ManaSystem
   chargeEfficiency: 1
+  levelBonus: 0
+  passiveBonus: 0
 --- !u!114 &318324297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,6 +1037,8 @@ GameObject:
   - component: {fileID: 1502058712}
   - component: {fileID: 1502058711}
   - component: {fileID: 1502058710}
+  - component: {fileID: 1502058714}
+  - component: {fileID: 1502058713}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1083,6 +1087,92 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1502058713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502058709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b7fe185547ed14ebaae267598dc4e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Combat.SkillTreeManager
+  allSkills:
+  - {fileID: 11400000, guid: ac0a4f7fea37c4541ad4e7c61f023b7b, type: 2}
+  - {fileID: 11400000, guid: 13d4457bc10c09d429448d95ea895532, type: 2}
+  - {fileID: 11400000, guid: 891ae45d59aa44641bb054de1706c657, type: 2}
+  - {fileID: 11400000, guid: 9887364b43ec7a74180532b574f91f65, type: 2}
+  - {fileID: 11400000, guid: 2742938197987d74c957af55e0724ea1, type: 2}
+  - {fileID: 11400000, guid: d734975a8bdbeb64e9bdd78881390296, type: 2}
+  - {fileID: 11400000, guid: f4b4b7a450686a742bd8e62f5b2fa871, type: 2}
+  - {fileID: 11400000, guid: 16ff782fea31fc747b8b42ae1222b003, type: 2}
+  - {fileID: 11400000, guid: badd935111a8d684489c7bd3f6cb681c, type: 2}
+  - {fileID: 11400000, guid: 50d4542d150b0914e9453abfd58bdb7a, type: 2}
+  - {fileID: 11400000, guid: 4342d752fcfb57e489513c9a7f7a4164, type: 2}
+  - {fileID: 11400000, guid: 7a7d0f05b8c54d74c91c7421afd6c334, type: 2}
+  - {fileID: 11400000, guid: 342a2bb211b1765498c1c62e213f216a, type: 2}
+  - {fileID: 11400000, guid: 01d7d9525646d1c4aa3b406b6b7d3fc2, type: 2}
+  - {fileID: 11400000, guid: d305e795a6481ec4da8bf39bf50c3c79, type: 2}
+  - {fileID: 11400000, guid: acb50834e3a0aeb4b847c48fe60b18d9, type: 2}
+  - {fileID: 11400000, guid: 4f0d29da353442547a905602dd9fe164, type: 2}
+  - {fileID: 11400000, guid: 53c67148ec153a34da987186531f5e3b, type: 2}
+  - {fileID: 11400000, guid: 99810affba96038429667b368440db0f, type: 2}
+  - {fileID: 11400000, guid: 35a92a5211aea3c4b9ca41bdafe67725, type: 2}
+  - {fileID: 11400000, guid: 2112e6d46ab377a42a144933d3afda06, type: 2}
+  - {fileID: 11400000, guid: 0e204246bc1122745b06a577882d1dd9, type: 2}
+  - {fileID: 11400000, guid: d2e3313999eecff4893d45098ae555f7, type: 2}
+  - {fileID: 11400000, guid: aec04d576666a234dbe78b3ba9e17fc2, type: 2}
+  - {fileID: 11400000, guid: 2710d705690363c49b077edb858db7bb, type: 2}
+  - {fileID: 11400000, guid: 1fa8da4da0ee74746817bf61bd1a1271, type: 2}
+  - {fileID: 11400000, guid: 08d38bceb87b47b4999d57c8236bc2de, type: 2}
+  - {fileID: 11400000, guid: 1f7e514d08258a94d9ddbf5f65c419e9, type: 2}
+  - {fileID: 11400000, guid: a077e5bb5588c4d4694a3e51af4804a8, type: 2}
+  - {fileID: 11400000, guid: b67639ca30a879047b4d2fa2082dca60, type: 2}
+  - {fileID: 11400000, guid: fdd5c0df834f12c4493e72d89084a799, type: 2}
+  - {fileID: 11400000, guid: 9fccba52b7ff2334091115a6d1c752ec, type: 2}
+  - {fileID: 11400000, guid: b290efb08a96c7248802e713b516f6d4, type: 2}
+  - {fileID: 11400000, guid: c2c6a9ef6e9796c4eb9596d25840aac4, type: 2}
+  - {fileID: 11400000, guid: d16fe144564b7d54b90003e999638ff4, type: 2}
+  - {fileID: 11400000, guid: f44a68d4972b4fe4285843853abc20e1, type: 2}
+  - {fileID: 11400000, guid: 559f85dd51b1c1b4da6e93cd381bad0b, type: 2}
+  - {fileID: 11400000, guid: e0c1f4d8baf3ae44aa10124ff74cd7cf, type: 2}
+  - {fileID: 11400000, guid: 58981000c4bb0ea49bba5364d2f2129e, type: 2}
+  - {fileID: 11400000, guid: 9e13f60894223604eb45ca027d88e3fc, type: 2}
+  - {fileID: 11400000, guid: f9541840ecae13f4b944ebc6073653cb, type: 2}
+  - {fileID: 11400000, guid: 9190843c01013d54ba792a34c6b9b834, type: 2}
+  - {fileID: 11400000, guid: d0c8d03867aab1a4ca2e8b6157e2a23e, type: 2}
+  - {fileID: 11400000, guid: e14d0e5afa8a9274c92fd3f95bc5bdfe, type: 2}
+  - {fileID: 11400000, guid: 77ec42b03570eb242827fbeeeaff915b, type: 2}
+  - {fileID: 11400000, guid: 9efb25c4d4bb75f469ec42be78ba7cb3, type: 2}
+  - {fileID: 11400000, guid: e68100890a12fd046b0a72bb53a2c049, type: 2}
+  - {fileID: 11400000, guid: 1e606e0c78d6143469350f96a8303bbe, type: 2}
+  - {fileID: 11400000, guid: 1818e79b5604c1e408c223e3efd1dd9a, type: 2}
+  - {fileID: 11400000, guid: 0ba626dd4eb602344888b5229a302eda, type: 2}
+  - {fileID: 11400000, guid: 63abcd0e58c32764e86b5ae660323690, type: 2}
+  - {fileID: 11400000, guid: 82280602fbf3c634dbf069fb77686296, type: 2}
+  - {fileID: 11400000, guid: f6db0eb0d1ca2644ca1bd3f5a334fb0b, type: 2}
+  - {fileID: 11400000, guid: d528db5c455b53d4eb97de6543d3d4c9, type: 2}
+  - {fileID: 11400000, guid: 681af73c01101794facd5702b2929c33, type: 2}
+  - {fileID: 11400000, guid: 92a5eb34731e8b04b9d19215970225f0, type: 2}
+  - {fileID: 11400000, guid: 1579060473f8f6046a8dab6a803038ce, type: 2}
+  - {fileID: 11400000, guid: 324750314a76e8c47bfe131517aa1f2a, type: 2}
+  - {fileID: 11400000, guid: 2136a87fc7472524aadd7c81ef2a0cd3, type: 2}
+  - {fileID: 11400000, guid: 81f211a79e5d6cf4cb078392a83c78b6, type: 2}
+--- !u!114 &1502058714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502058709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e846f8a6672c2640a8ec6e155bfc3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Meta.LevelSystem
+  playerData: {fileID: 0}
 --- !u!1 &1588012037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1186,7 @@ GameObject:
   - component: {fileID: 1588012038}
   - component: {fileID: 1588012042}
   - component: {fileID: 1588012041}
+  - component: {fileID: 1588012043}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1171,7 +1262,7 @@ Transform:
   m_GameObject: {fileID: 1588012037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1189,11 +1280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8c96e2cdc154e848a3d9fe62464d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProCamera2D.Runtime::Com.LuisPedroFonseca.ProCamera2D.ProCamera2D
-  CameraTargets:
-  - TargetTransform: {fileID: 5117860763261320723}
-    TargetInfluenceH: 1
-    TargetInfluenceV: 1
-    TargetOffset: {x: 0, y: 0}
+  CameraTargets: []
   CenterTargetOnStart: 0
   Axis: 0
   UpdateType: 0
@@ -1202,7 +1289,7 @@ MonoBehaviour:
   FollowVertical: 1
   VerticalFollowSmoothness: 0.15
   OffsetX: 0
-  OffsetY: 2
+  OffsetY: 0
   IsRelativeOffset: 1
   ZoomWithFOV: 0
   IgnoreTimeScale: 0
@@ -1256,6 +1343,24 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1588012043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588012037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088331fd40af8f04f9f76df4c0eba042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Physics.CameraController
+  targetCamera: {fileID: 1588012039}
+  baseOrthographicSize: 9
+  smoothTime: 0.3
+  sizeEpsilon: 0.01
+  activeBallCount: 1
+  inBossFight: 0
 --- !u!1 &1953505445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,6 +1828,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5378134468079260530, guid: 77703e302ca0c8f4c94feba5228fcc6e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8c2b9ef447e40ee45bc3394fc84a6958, type: 2}
     - target: {fileID: 6819000970460145691, guid: 77703e302ca0c8f4c94feba5228fcc6e, type: 3}
       propertyPath: m_Name
       value: Ball
@@ -1788,11 +1897,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77703e302ca0c8f4c94feba5228fcc6e, type: 3}
---- !u!4 &5117860763261320723 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8284587558306323742, guid: 77703e302ca0c8f4c94feba5228fcc6e, type: 3}
-  m_PrefabInstance: {fileID: 5117860763261320722}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

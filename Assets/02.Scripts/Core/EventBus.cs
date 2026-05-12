@@ -135,4 +135,42 @@ namespace RPGPinball.Core
     {
         public float Delta;
     }
+
+    // ── 마일스톤 3 이벤트 ─────────────────────────────────────
+
+    public struct OnLevelUp
+    {
+        public int PreviousLevel;
+        public int NewLevel;
+    }
+
+    public struct OnXPGained
+    {
+        public int Amount;
+        public int CurrentXP;
+        public int RequiredXP;
+    }
+
+    public struct OnSkillPointGained
+    {
+        public int Delta;
+        public int TotalSP;
+        public string Reason; // "LevelUp" / "BossKill" / "ActClear"
+    }
+
+    public struct OnSkillInvested
+    {
+        public int SkillId;
+        public int NewLevel;
+    }
+
+    public struct OnSkillReset
+    {
+        public int RefundedSP;
+    }
+
+    public struct OnBallCountChanged
+    {
+        public int Count;
+    }
 }

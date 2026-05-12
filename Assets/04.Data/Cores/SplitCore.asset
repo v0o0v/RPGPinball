@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6ec7b82cee69142b09d662e4280fe4, type: 3}
+  m_Name: SplitCore
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.CoreData
+  coreId: 2
+  grade: 0
+  displayName: "\uBD84\uC5F4 \uCF54\uC5B4"
+  descriptionKo: "\uBA40\uD2F0\uBCFC \uBD84\uC5F4 \uC2DC \uBD84\uC5F4 \uACF5\uC758
+    \uB370\uBBF8\uC9C0 \uD398\uB110\uD2F0\uAC00 \uC644\uD654\uB418\uB294 \uCF54\uC5B4."
+  level: 1
+  requiredFragments: 5
+  accelerationCoefficient: 0
+  splitDamageRelief: 0.02
+  chronoTimeBonus: 0
+  defenseMultiplier: 1
+  critChanceBonus: 0
+  manaEfficiencyMultiplier: 1
+  gradeMultiplier: 1

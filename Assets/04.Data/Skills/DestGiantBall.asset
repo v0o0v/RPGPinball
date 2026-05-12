@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe7ce6dfe863eb4ba9ccfc0c7bd0ec1, type: 3}
+  m_Name: DestGiantBall
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.SkillData
+  id: 213
+  displayName: "\uC790\uC774\uC5B8\uD2B8 \uBCFC"
+  category: 1
+  branch: 1
+  type: 1
+  tier: 4
+  maxLevel: 4
+  prerequisiteIds: d0000000
+  prerequisiteMinLevel: 1
+  manaCost: 50
+  cooldown: 0
+  shape: 0
+  radius: 1.5
+  size: {x: 0, y: 0}
+  sectorAngle: 0
+  maxHits: -1
+  damageType: 0
+  dealsKnockback: 1
+  knockbackForce: 2
+  isUltimate: 0
+  baseMultiplier: 1
+  perLevelMultiplier: 0
+  linearBase: 0
+  linearPerLevel: 0
+  diminishMax: 0
+  diminishRate: 0.95
+  stackBase: 0
+  stackPerLevel: 0
+  stackLevelStep: 1
+  durationBase: 3
+  durationPerLevel: 0.2
+  descriptionKo: 

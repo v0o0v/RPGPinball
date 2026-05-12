@@ -57,6 +57,16 @@ namespace RPGPinball.Combat
         public void StartTimer() { running = true; gameOverFired = false; }
         public void StopTimer() => running = false;
 
+        /// <summary>테스트/디버그용 — 타이머를 명시적으로 startTime으로 초기화. EditMode 테스트 등에서 Awake가 호출되지 않은 경우 사용.</summary>
+        public void ResetTimer(float startTime)
+        {
+            total = startTime;
+            remaining = SafeFloat.Create(startTime);
+            totalRecovered = SafeFloat.Create(0f);
+            running = false;
+            gameOverFired = false;
+        }
+
         private void Update()
         {
             if (!running) return;

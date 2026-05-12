@@ -12,6 +12,7 @@ namespace RPGPinball.Data
         [Header("식별")]
         public int id;
         public string displayName;
+        public int level = 1; // 마일스톤 3: 오버레벨링 페널티 계산용
 
         [Header("스탯")]
         public int maxHp = 100;

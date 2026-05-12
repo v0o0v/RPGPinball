@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6ec7b82cee69142b09d662e4280fe4, type: 3}
+  m_Name: GuardianCore
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.CoreData
+  coreId: 4
+  grade: 0
+  displayName: "\uAC00\uB514\uC5B8 \uCF54\uC5B4"
+  descriptionKo: "\uBC29\uC5B4/\uC800\uD56D \uAC15\uD654 \uCF54\uC5B4 (\uB9C8\uC77C\uC2A4\uD1A4
+    6 \uD65C\uC131)."
+  level: 1
+  requiredFragments: 5
+  accelerationCoefficient: 0
+  splitDamageRelief: 0
+  chronoTimeBonus: 0
+  defenseMultiplier: 1.2
+  critChanceBonus: 0
+  manaEfficiencyMultiplier: 1
+  gradeMultiplier: 1
