@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe7ce6dfe863eb4ba9ccfc0c7bd0ec1, type: 3}
+  m_Name: SafetyWall
+  m_EditorClassIdentifier: Assembly-CSharp::RPGPinball.Data.SkillData
+  id: 11
+  displayName: "\uC138\uC774\uD504\uD2F0 \uC6D4"
+  category: 0
+  type: 1
+  tier: 4
+  maxLevel: 5
+  manaCost: 40
+  cooldown: 0
+  shape: 1
+  radius: 0
+  size: {x: 9, y: 3}
+  sectorAngle: 0
+  maxHits: 0
+  damageType: 0
+  dealsKnockback: 0
+  knockbackForce: 0
+  isUltimate: 0
+  baseMultiplier: 0
+  perLevelMultiplier: 0

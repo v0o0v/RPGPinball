@@ -39,7 +39,9 @@
 ```
 BaseDamage = PlayerBaseDamage * (1 + PlayerLevel * 0.02)
 ```
-- `PlayerBaseDamage`: 기본값 10 (Lv.1)
+- `PlayerBaseDamage`: **상수 10** (레벨 보정 전 기준값)
+- Lv.0 기준: `10 * (1 + 0)` = **10**
+- Lv.1 기준: `10 * (1 + 1 * 0.02)` = **10.2**
 - Lv.90 기준: `10 * (1 + 90 * 0.02)` = **28**
 
 ### [2] 스킬 트리 패시브 (합연산 → 곱연산)

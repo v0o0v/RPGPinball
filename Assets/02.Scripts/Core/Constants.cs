@@ -72,5 +72,36 @@ namespace RPGPinball.Core
         public const string TagProjectile = "Projectile";
         public const string TagBumper = "Bumper";
         public const string TagWall = "Wall";
+
+        // ── 데미지 (Damage_Formula.md) ─────────────────────────
+        public const float PlayerBaseDamage = 10f;
+        public const float LevelDamageScale = 0.02f;
+        public const float CritChanceDefault = 0.05f;
+        public const float CritMultiplierDefault = 1.5f;
+        public const float MithrilMagicMultiplier = 1.15f;
+        public const int MultiplierStackLimit = 2; // 3개째부터 합연산 전환
+
+        // ── 콤보 ────────────────────────────────────────────────
+        public const float ComboResetSeconds = 3.0f;
+        public const int ComboTier1 = 10; // 마나 ×1.5
+        public const int ComboTier2 = 30; // 마나 ×2.0
+        public const float ComboMultTier1 = 1.5f;
+        public const float ComboMultTier2 = 2.0f;
+
+        // ── 마나 ────────────────────────────────────────────────
+        public const int ManaMax = 100;
+        public const int ManaPerWall = 3;
+        public const int ManaPerMonster = 8;
+        public const int ManaPerBoss = 15;
+
+        // ── 타이머 (Physics_Parameters.md) ─────────────────────
+        public const float StageDefaultTime = 180f;
+        public const float TimeRecoverCapPerStage = 60f;
+        public const float ProjectilePenetratePenalty = -5f;
+        public const float BossDeadzonePenalty = -20f;
+
+        // ── 스킬 ────────────────────────────────────────────────
+        public const float SkillCastDelay = 0.3f;
+        public const int SkillDeckSize = 4;
     }
 }

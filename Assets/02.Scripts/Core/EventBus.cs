@@ -100,4 +100,39 @@ namespace RPGPinball.Core
         Paused,
         Result
     }
+
+    // ── 마일스톤 2 이벤트 ─────────────────────────────────────
+
+    public struct OnDamageDealt
+    {
+        public UnityEngine.GameObject Target;
+        public float Damage;
+        public bool IsCritical;
+        public bool IsMagic;
+    }
+
+    public struct OnMonsterKilled
+    {
+        public UnityEngine.GameObject Monster;
+        public int XpReward;
+        public int GoldReward;
+        public bool IsBoss;
+    }
+
+    public struct OnSkillCast
+    {
+        public int SkillId;
+        public UnityEngine.Vector2 Position;
+    }
+
+    public struct OnTimerChanged
+    {
+        public float Remaining;
+        public float Total;
+    }
+
+    public struct OnProjectilePenalty
+    {
+        public float Delta;
+    }
 }
