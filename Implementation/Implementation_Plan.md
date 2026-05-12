@@ -145,6 +145,19 @@ Assets/
 - 공 발사 → 벽 반사 → 플리퍼 타격 → 낙사/리스폰 루프 확인
 - 4종 재질 PhysicsMaterial2D 프리셋 생성 후 교체 테스트
 
+### 마일스톤 1 → 후속 인계 사항
+
+> 마일스톤 1 회고형 검증([Milestone1_TODO.md](Milestone1_TODO.md))에서 식별된, 후속 마일스톤에 넘긴 항목.
+
+| # | 항목 | 인계 대상 | 사유 |
+|---|---|---|---|
+| 1 | 멀티볼 카메라 줌아웃 (+0.1/공) — `Constants.CameraMultiballZoomPerBall` | **마일스톤 3** | `MultiBallI` 스킬 실 구현(공 추가) 시점에 ProCamera2D 동적 줌 로직 추가 |
+| 2 | 보스전 카메라 줌아웃 ×1.2 — `Constants.CameraBossZoom` | **마일스톤 4** | 보스 등장 트리거 도입 시 ProCamera2D `UpdateScreenSize` 호출로 동적 적용 |
+| 3 | Flipper 탄막 블로킹용 트리거 자식 콜라이더 | **마일스톤 4** | 현재 BoxCollider2D `isTrigger=false`로 인해 `OnTriggerEnter2D(Projectile)` 분기 호출 불가. 탄막 도입 시 자식 트리거 콜라이더 분리 필요 |
+| 4 | DeadZone 보스전 -20초 분기 — `Constants.BossDeadzonePenalty` | **마일스톤 4** | 보스 컨텍스트 도입 시 DeadZone에 분기 추가 (마일스톤 2 인계 표와 중복) |
+| 5 | Camera Orthographic Size 재조정 (현재 임시값 9) | **마일스톤 7** | Android 세로 화면 비율(9:16~9:19.5)에서 플레이필드 전체가 한눈에 보이도록 조정 |
+| 6 | SaveEncryption `AppSalt` 외부 주입 메커니즘 | **마일스톤 7** | 현재 하드코딩. 실 배포 빌드 파이프라인/서버에서 주입하는 구조로 전환 |
+
 ---
 
 ## 마일스톤 2: 전투 시스템 (2~3주)
@@ -244,6 +257,8 @@ Assets/
 > **목표**: 60종 스킬 트리, 레벨링, SP 시스템 완성
 >
 > **[인계: M2]** 마일스톤 2에서 넘긴 항목 — 스킬 14종 본 구현, DamageContext 필드 보강(공 속도·재질·콤보·타격직후), DamageCalculator 단계 [3] 코어 효과, ManaSystem.ChargeEfficiency 적용, 미스릴 ×1.15 실 플레이 검증, ManaSystemTests/StageTimerTests, "원소 폭주" 스킬 트리 정합 재확인. (상세는 §마일스톤 2 → 후속 인계 사항 표)
+>
+> **[인계: M1]** 멀티볼 카메라 줌아웃 (+0.1/공, `Constants.CameraMultiballZoomPerBall`) — `MultiBallI` 스킬 실 구현 시점에 ProCamera2D 동적 줌 로직 추가.
 
 ### 데이터 구조
 
@@ -284,6 +299,8 @@ Assets/
 > **목표**: 12종 보스 + 4종 엘리트 몬스터 AI 구현
 >
 > **[인계: M2]** 보스전 낙사 -20초 분기(`DeadZone`), `ProjectileBase` 풀링 전환, 탄막 공 접촉 시 강제 감속/넉백.
+>
+> **[인계: M1]** 보스전 카메라 줌아웃 ×1.2(`Constants.CameraBossZoom`), Flipper 탄막 블로킹용 트리거 자식 콜라이더 분리.
 
 ### 보스 AI 프레임워크
 
@@ -450,6 +467,8 @@ Assets/
 > **목표**: `UI_Flow.md` 기반 전체 화면 흐름 + 세이브 시스템
 >
 > **[인계: M2]** 스킬 인게임 입력부(슬롯 선택 UI + 터치 좌표 캡처), `FlipperController` ↔ `SkillDeck` 입력 충돌 차단 플래그, `OnComboMilestone(10/30/50/100)` 이벤트 훅 + 콤보 이펙트, `DebugHud` → 정식 `InGameHUD` 교체.
+>
+> **[인계: M1]** Camera Orthographic Size 재조정(현재 임시값 9 → Android 세로 비율 맞춤), `SaveEncryption.AppSalt` 외부 주입 메커니즘 (현재 하드코딩).
 
 ### 씬 구조
 

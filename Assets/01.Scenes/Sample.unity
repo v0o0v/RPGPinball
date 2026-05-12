@@ -1202,7 +1202,7 @@ MonoBehaviour:
   FollowVertical: 1
   VerticalFollowSmoothness: 0.15
   OffsetX: 0
-  OffsetY: 0
+  OffsetY: 2
   IsRelativeOffset: 1
   ZoomWithFOV: 0
   IgnoreTimeScale: 0

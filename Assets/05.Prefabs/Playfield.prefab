@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0cd5c5388a83c409c243b32891446f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RPGPinball.Physics.PlayfieldBuilder
-  bumperPrefab: {fileID: 0}
-  wallMaterial: {fileID: 0}
+  bumperPrefab: {fileID: 2009597642423874637, guid: de39c000316ba9b489a6020726bef395, type: 3}
+  wallMaterial: {fileID: 6200000, guid: 7422ecc1792bcff49a4451f020776bac, type: 2}
   bumperPositions:
   - {x: 1.86, y: 6}
   - {x: 4.5, y: 8}
