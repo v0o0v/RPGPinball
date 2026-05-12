@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ball
+  - DeadZone
+  - Flipper
+  - Bumper
+  - Boss
+  - Monster
+  - Projectile
+  - Wall
   layers:
   - Default
   - TransparentFX
