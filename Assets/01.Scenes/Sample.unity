@@ -485,6 +485,54 @@ Transform:
   - {fileID: 1953505446}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &555032373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555032375}
+  - component: {fileID: 555032374}
+  m_Layer: 0
+  m_Name: ProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &555032374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555032373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0527bb0213c9142a593fb3bd934050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Enemy.Pool.ProjectilePool
+  smallProjectilePrefab: {fileID: 1768362181976932505, guid: 7a0d7ce39c085f84fa10a177d67bc3d5, type: 3}
+  largeProjectilePrefab: {fileID: 8574788602864243340, guid: d996d8a2bf9a0f84baeafd080e92ba93, type: 3}
+  specialProjectilePrefab: {fileID: 3633448281151950225, guid: 4796713afa084b642b87484284cb9d77, type: 3}
+  prewarmOnAwake: 1
+--- !u!4 &555032375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555032373}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &748468873
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +723,181 @@ RectTransform:
   m_AnchoredPosition: {x: 40, y: -110}
   m_SizeDelta: {x: 500, y: 60}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &878395989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 878395994}
+  - component: {fileID: 878395993}
+  - component: {fileID: 878395992}
+  - component: {fileID: 878395991}
+  - component: {fileID: 878395990}
+  m_Layer: 0
+  m_Name: Boss_FleshPlant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &878395990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878395989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1046e9129bb0164891800f8d2a1c94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Enemy.BossAI.Act1.FleshPlantBoss
+  data: {fileID: 11400000, guid: 8f6f9aed316c79348b1cd75abedb5fc9, type: 2}
+  playerLevelOverride: 1
+  knockbackTier: 0
+  weakPointHitboxPrefab: {fileID: 0}
+  smallBullet: {fileID: 11400000, guid: 086fcc99d7a181a46a6142cc6c0046ba, type: 2}
+  vineKnockbackForce: 4
+--- !u!50 &878395991
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878395989}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &878395992
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878395989}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
+--- !u!212 &878395993
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878395989}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 1175673710}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2, y: 2}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!4 &878395994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878395989}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &908379956
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +1097,216 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d00ba27bd995a4946804b5314c0c3c4d, type: 3}
+--- !u!213 &1175673710
+Sprite:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 64
+    height: 64
+  m_Offset: {x: 0, y: 0}
+  m_Border: {x: 0, y: 0, z: 0, w: 0}
+  m_PixelsToUnits: 32
+  m_Pivot: {x: 0.5, y: 0.5}
+  m_Extrude: 0
+  m_IsPolygon: 0
+  m_PackingTag: 
+  m_RenderDataKey:
+    00000000000000000000000000000000: 0
+  m_AtlasTags: []
+  m_SpriteAtlas: {fileID: 0}
+  m_RD:
+    serializedVersion: 3
+    texture: {fileID: 1720230062}
+    alphaTexture: {fileID: 0}
+    secondaryTextures: []
+    m_SubMeshes:
+    - serializedVersion: 2
+      firstByte: 0
+      indexCount: 18
+      topology: 0
+      baseVertex: 0
+      firstVertex: 0
+      vertexCount: 8
+      localAABB:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+    m_IndexBuffer: 070006000400050004000600030004000500010004000300000001000300020001000000
+    m_VertexData:
+      serializedVersion: 3
+      m_VertexCount: 8
+      m_Channels:
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 3
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 1
+        offset: 0
+        format: 0
+        dimension: 2
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      m_DataSize: 160
+      _typelessdata: 0000803f0000183f000000000000183f000080bf000000000000803f000000bf000000000000003f0000803f00000000000008bf000080bf00000000000018bf0000803f00000000000080bf0000003f00000000000080bf000020bf0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    m_Bindpose: []
+    textureRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 64
+      height: 64
+    textureRectOffset: {x: 0, y: 0}
+    atlasRectOffset: {x: -1, y: -1}
+    settingsRaw: 64
+    uvTransform: {x: 32, y: 32, z: 32, w: 32}
+    downscaleMultiplier: 1
+  m_AtlasRD:
+    serializedVersion: 3
+    texture: {fileID: 1720230062}
+    alphaTexture: {fileID: 0}
+    secondaryTextures: []
+    m_SubMeshes:
+    - serializedVersion: 2
+      firstByte: 0
+      indexCount: 18
+      topology: 0
+      baseVertex: 0
+      firstVertex: 0
+      vertexCount: 8
+      localAABB:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
+    m_IndexBuffer: 070006000400050004000600030004000500010004000300000001000300020001000000
+    m_VertexData:
+      serializedVersion: 3
+      m_VertexCount: 8
+      m_Channels:
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 3
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 1
+        offset: 0
+        format: 0
+        dimension: 2
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      - stream: 0
+        offset: 0
+        format: 0
+        dimension: 0
+      m_DataSize: 160
+      _typelessdata: 0000803f0000183f000000000000183f000080bf000000000000803f000000bf000000000000003f0000803f00000000000008bf000080bf00000000000018bf0000803f00000000000080bf0000003f00000000000080bf000020bf0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    m_Bindpose: []
+    textureRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 64
+      height: 64
+    textureRectOffset: {x: 0, y: 0}
+    atlasRectOffset: {x: -1, y: -1}
+    settingsRaw: 64
+    uvTransform: {x: 32, y: 32, z: 32, w: 32}
+    downscaleMultiplier: 1
+  m_PhysicsShape: []
+  m_Bones: []
+  m_ScriptableObjects: []
+  m_SpriteID: 
 --- !u!1001 &1233115392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1361,6 +1794,52 @@ MonoBehaviour:
   sizeEpsilon: 0.01
   activeBallCount: 1
   inBossFight: 0
+--- !u!28 &1720230062
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 4
+  m_Width: 64
+  m_Height: 64
+  m_CompleteImageSize: 16384
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 1
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 16384
+  _typelessdata: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff80cc4dff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1953505445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1915,3 +2394,5 @@ SceneRoots:
   - {fileID: 1974708639}
   - {fileID: 1233115392}
   - {fileID: 1107892130}
+  - {fileID: 555032375}
+  - {fileID: 878395994}

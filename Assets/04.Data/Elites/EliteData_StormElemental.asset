@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6317c52adddda144e81f668b0359fb38, type: 3}
+  m_Name: EliteData_StormElemental
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.EliteData
+  id: 0
+  displayName: "\uD3ED\uD48D\uC758 \uC815\uB839"
+  level: 30
+  maxHp: 20000
+  defense: 15
+  magicResist: 7
+  xpReward: 1000
+  goldReward: 2000
+  manaOnHit: 8
+  knockbackTier: 1
+  isBoss: 1
+  eliteId: 1
+  actNumber: 1
+  enragedHpRatio: 0.25
+  fleeTimerSeconds: 0
+  firstHitTimeoutSeconds: 0
+  hasFrontalShield: 0
+  frontalShieldArcDeg: 180
+  backDefenseRatio: 0.15
+  lifeStealRatio: 0
+  lifeStealCap: 200
+  patterns:
+  - patternId: P1
+    availableFromPhase: 0
+    exclusiveToPhase: 0
+    telegraphSeconds: 0.5
+    executeSeconds: 0.5
+    recoverySeconds: 1
+    weightPercent: 35
+    minIntervalSeconds: 8
+  - patternId: P2
+    availableFromPhase: 0
+    exclusiveToPhase: 0
+    telegraphSeconds: 1
+    executeSeconds: 0.5
+    recoverySeconds: 2.5
+    weightPercent: 30
+    minIntervalSeconds: 5
+  - patternId: P3
+    availableFromPhase: 0
+    exclusiveToPhase: 0
+    telegraphSeconds: 0.3
+    executeSeconds: 0.4
+    recoverySeconds: 3
+    weightPercent: 35
+    minIntervalSeconds: 5
+  weakPoints: []
+  rewardTable:
+    bonusXp: 1000
+    bonusGold: 2000
+    bossSoul: 0
+    manaCrystal: 50
+    spReward: 0
+    uniqueDropId: 1
+  stageTimeLimit: 120

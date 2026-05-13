@@ -28,6 +28,11 @@ namespace RPGPinball.Physics
         private bool unlimitedStack;
         private readonly List<FlipperInstance> active = new();
 
+        // ── 마일스톤 4: 소환 차단 (꽃가루 침묵 / 집게 강타 / 시간 정지) ──
+        // areaBlocked[i] == 영역 한정 차단, fullBlockedUntil == 전체 차단 종료 시각
+        private float fullBlockedUntil;
+        private readonly List<(Rect area, float endTime)> areaBlocks = new();
+
         private void Awake()
         {
             var map = inputActions.FindActionMap("Pinball", throwIfNotFound: true);
@@ -41,6 +46,7 @@ namespace RPGPinball.Physics
             touchPositionAction.Enable();
             touchPressAction.performed += OnTouchPerformed;
             EventBus.Subscribe<OnFlipperBlocked>(OnBlocked);
+            EventBus.Subscribe<OnFlipperSpawnBlocked>(OnSpawnBlocked);
         }
 
         private void OnDisable()
@@ -49,6 +55,7 @@ namespace RPGPinball.Physics
             touchPressAction.Disable();
             touchPositionAction.Disable();
             EventBus.Unsubscribe<OnFlipperBlocked>(OnBlocked);
+            EventBus.Unsubscribe<OnFlipperSpawnBlocked>(OnSpawnBlocked);
         }
 
         private void Update()
@@ -72,14 +79,45 @@ namespace RPGPinball.Physics
                 return;
             if (cooldown > 0f) return;
 
+            // 전체 차단
+            if (Time.time < fullBlockedUntil) return;
+
             var screenPos = touchPositionAction.ReadValue<Vector2>();
             var worldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 0f));
             var spawnPos = new Vector2(worldPos.x, worldPos.y);
+
+            // 영역 차단 (집게 강타, 보스 발생 영역 등)
+            PurgeExpiredAreaBlocks();
+            for (int i = 0; i < areaBlocks.Count; i++)
+            {
+                if (areaBlocks[i].area.Contains(spawnPos)) return;
+            }
 
             if (!IsSpawnAllowed(spawnPos)) return;
             if (IsTooCloseToExisting(spawnPos)) return;
 
             SpawnFlipper(spawnPos);
+        }
+
+        private void OnSpawnBlocked(OnFlipperSpawnBlocked evt)
+        {
+            float endTime = Time.time + Mathf.Max(0f, evt.Duration);
+            if (evt.Area.HasValue)
+            {
+                areaBlocks.Add((evt.Area.Value, endTime));
+            }
+            else
+            {
+                fullBlockedUntil = Mathf.Max(fullBlockedUntil, endTime);
+            }
+        }
+
+        private void PurgeExpiredAreaBlocks()
+        {
+            for (int i = areaBlocks.Count - 1; i >= 0; i--)
+            {
+                if (Time.time >= areaBlocks[i].endTime) areaBlocks.RemoveAt(i);
+            }
         }
 
         private void SpawnFlipper(Vector2 pos)

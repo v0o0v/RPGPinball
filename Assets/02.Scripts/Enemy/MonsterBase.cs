@@ -40,6 +40,9 @@ namespace RPGPinball.Enemy
         public bool IsStunned => Time.time < stunEndTime;
         public bool IsBurning => Time.time < burnEndTime;
         public KnockbackTier KnockbackTier => knockbackTier;
+        // 보스가 페이즈별 DEF 주입할 수 있도록 가상 메서드로 노출
+        public virtual int GetEffectiveDefense() { return data != null ? data.defense : 0; }
+        public virtual int GetEffectiveMagicResist() { return data != null ? data.magicResist : 0; }
 
         protected virtual void Awake()
         {
@@ -80,8 +83,8 @@ namespace RPGPinball.Enemy
 
             int playerLv = LevelSystem.Instance != null ? LevelSystem.Instance.Level : playerLevelOverride;
             var ctx = DamageContext.Default(playerLv, DamageType.Physical);
-            ctx.TargetDefense = data.defense;
-            ctx.TargetMagicResist = data.magicResist;
+            ctx.TargetDefense = GetEffectiveDefense();
+            ctx.TargetMagicResist = GetEffectiveMagicResist();
             ctx.BallSpeed = col.relativeVelocity.magnitude;
             ctx.TargetCurrentHpRatio = CurrentHpRatio;
 

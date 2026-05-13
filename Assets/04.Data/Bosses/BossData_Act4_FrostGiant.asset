@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2eb022047bc1e54680bc101b4f1a8d7, type: 3}
+  m_Name: BossData_Act4_FrostGiant
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.BossData
+  id: 0
+  displayName: "\uC11C\uB9AC\uAC70\uC778"
+  level: 100
+  maxHp: 19600
+  defense: 30
+  magicResist: 15
+  xpReward: 900
+  goldReward: 1800
+  manaOnHit: 8
+  knockbackTier: 2
+  isBoss: 1
+  bossId: 410
+  actNumber: 4
+  stageNumber: 10
+  hasPhase2: 0
+  hasPhase3: 0
+  phase2HpRatio: 0.6
+  phase3HpRatio: 0.3
+  enragedHpRatio: 0.3
+  phaseDefenseRatios:
+  - 0.3
+  patterns:
+  - patternId: P2
+    availableFromPhase: 0
+    exclusiveToPhase: 0
+    telegraphSeconds: 1.5
+    executeSeconds: 0.5
+    recoverySeconds: 3
+    weightPercent: 35
+    minIntervalSeconds: 5
+  - patternId: P4
+    availableFromPhase: 0
+    exclusiveToPhase: 0
+    telegraphSeconds: 1
+    executeSeconds: 0.5
+    recoverySeconds: 1.5
+    weightPercent: 40
+    minIntervalSeconds: 4
+  - patternId: P5
+    availableFromPhase: 0
+    exclusiveToPhase: 0
+    telegraphSeconds: 1.2
+    executeSeconds: 0.5
+    recoverySeconds: 2
+    weightPercent: 25
+    minIntervalSeconds: 5
+  weakPoints: []
+  rewardTable:
+    bonusXp: 900
+    bonusGold: 1800
+    bossSoul: 2
+    manaCrystal: 35
+    spReward: 1
+    uniqueDropId: 0
+  stageTimeLimit: 180

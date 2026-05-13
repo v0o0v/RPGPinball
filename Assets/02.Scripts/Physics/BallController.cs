@@ -31,7 +31,16 @@ namespace RPGPinball.Physics
         private bool forcedSpeedActive;
         private float forcedSpeed;
 
+        // 마일스톤 4: 강제 감속/시간 가속·감속 (탄막 슬로우 / 시계탑 보스)
+        private float forcedSlowMultiplier = 1f;
+        private float forcedSlowEndTime;
+        private float forcedSpeedMultiplier = 1f;
+        private float forcedSpeedMultiplierEndTime;
+        // 절대 영도 (겨울 여왕 P5)
+        private float lastCollisionTime;
+
         public bool IsInvincible => invincibleTimer > 0f;
+        public float LastCollisionTime => lastCollisionTime;
         public BallMaterial Material { get => ballMaterial; set => ballMaterial = value; }
         public BallTransformation Transformation => transformation;
         public bool IsSplitBall
@@ -94,8 +103,28 @@ namespace RPGPinball.Physics
             else
             {
                 ClampSpeed();
+                ApplyForcedSlowModifiers();
+                ApplyForcedSpeedMultiplierModifiers();
             }
             CheckFallDead();
+        }
+
+        private void ApplyForcedSlowModifiers()
+        {
+            if (Time.time >= forcedSlowEndTime) { forcedSlowMultiplier = 1f; return; }
+            if (rb.linearVelocity.sqrMagnitude > 0.0001f)
+                rb.linearVelocity *= forcedSlowMultiplier;
+        }
+
+        private void ApplyForcedSpeedMultiplierModifiers()
+        {
+            if (Time.time >= forcedSpeedMultiplierEndTime) { forcedSpeedMultiplier = 1f; return; }
+            if (Mathf.Approximately(forcedSpeedMultiplier, 1f)) return;
+            // 1.0이 아닐 때만 클램프 후 곱
+            float current = rb.linearVelocity.magnitude;
+            if (current <= 0.01f) return;
+            float target = Mathf.Clamp(current * forcedSpeedMultiplier, Constants.BallMinSpeed, Constants.BallMaxSpeed);
+            rb.linearVelocity = rb.linearVelocity.normalized * target;
         }
 
         private void Update()
@@ -139,6 +168,30 @@ namespace RPGPinball.Physics
         public void ClearForcedSpeed()
         {
             forcedSpeedActive = false;
+        }
+
+        // ── 마일스톤 4: 강제 감속 / 시간 가속·감속 ─────────────
+
+        /// <summary>탄막 접촉, 빙결 장판 등에서 일정 기간 공 속도 ×multiplier.</summary>
+        public void ApplyForcedSlow(float multiplier, float duration)
+        {
+            forcedSlowMultiplier = Mathf.Clamp(multiplier, 0f, 1f);
+            forcedSlowEndTime = Time.time + duration;
+            // 즉시 1회 적용
+            if (rb != null && rb.linearVelocity.sqrMagnitude > 0.0001f)
+                rb.linearVelocity *= forcedSlowMultiplier;
+        }
+
+        /// <summary>시계탑 시간 가속/감속. duration 동안 공 속도 ×multiplier.</summary>
+        public void ApplyForcedSpeedMultiplier(float multiplier, float duration)
+        {
+            forcedSpeedMultiplier = Mathf.Max(0.01f, multiplier);
+            forcedSpeedMultiplierEndTime = Time.time + duration;
+            if (rb != null && rb.linearVelocity.sqrMagnitude > 0.0001f)
+            {
+                float target = Mathf.Clamp(rb.linearVelocity.magnitude * forcedSpeedMultiplier, Constants.BallMinSpeed, Constants.BallMaxSpeed);
+                rb.linearVelocity = rb.linearVelocity.normalized * target;
+            }
         }
 
         // ── 변신 (A전환) ──────────────────────────────────────
@@ -195,10 +248,18 @@ namespace RPGPinball.Physics
 
         private void OnCollisionEnter2D(Collision2D col)
         {
+            // 절대 영도 추적: 벽/범퍼/적과의 충돌 시각 기록
+            string tag = col.gameObject.tag;
+            if (tag == Constants.TagWall || tag == Constants.TagBumper
+                || tag == Constants.TagMonster || tag == Constants.TagBoss)
+            {
+                lastCollisionTime = Time.time;
+            }
+
             EventBus.Publish(new OnBallHit
             {
                 Speed = rb.linearVelocity.magnitude,
-                TargetTag = col.gameObject.tag
+                TargetTag = tag
             });
         }
     }

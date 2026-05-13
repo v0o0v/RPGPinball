@@ -173,4 +173,66 @@ namespace RPGPinball.Core
     {
         public int Count;
     }
+
+    // ── 마일스톤 4 이벤트 (Boss/Elite) ─────────────────────────
+
+    public struct OnBossSpawned
+    {
+        public UnityEngine.GameObject Boss;
+        public Data.BossId BossId;
+    }
+
+    public struct OnBossPhaseChanged
+    {
+        public UnityEngine.GameObject Boss;
+        public Data.BossPhase Phase;
+    }
+
+    public struct OnBossEnraged
+    {
+        public UnityEngine.GameObject Boss;
+    }
+
+    public struct OnBossDefeated
+    {
+        public UnityEngine.GameObject Boss;
+        public Data.BossId BossId;
+        public int XpReward;
+        public int GoldReward;
+        public int BossSoul;
+        public int ManaCrystal;
+        public int SpReward;
+    }
+
+    public struct OnEliteFlee
+    {
+        public UnityEngine.GameObject Elite;
+        public Data.EliteId EliteId;
+        public string Reason; // "FirstHitTimeout" / "FleeTimer"
+    }
+
+    public struct OnLeviathanSubmerge
+    {
+        public UnityEngine.GameObject Elite;
+        public bool Submerging; // true: 잠수 시작, false: 부상
+    }
+
+    /// <summary>
+    /// 플리퍼 소환 차단. area=null이면 전 영역.
+    /// 꽃가루 침묵(전체), 무장 게 집게 강타(영역), 시계탑 시간 정지 등에서 사용.
+    /// </summary>
+    public struct OnFlipperSpawnBlocked
+    {
+        public float Duration;
+        public UnityEngine.Rect? Area;
+    }
+
+    /// <summary>
+    /// 공 속도 강제 조작 요청. 시계탑 가속/감속, 빙결 동결 등에서 사용.
+    /// </summary>
+    public struct OnTimeScaleRequest
+    {
+        public float BallSpeedMultiplier;
+        public float Duration;
+    }
 }

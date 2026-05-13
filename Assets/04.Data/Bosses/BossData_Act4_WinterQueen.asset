@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2eb022047bc1e54680bc101b4f1a8d7, type: 3}
+  m_Name: BossData_Act4_WinterQueen
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.BossData
+  id: 0
+  displayName: "\uACA8\uC6B8 \uC5EC\uC655"
+  level: 100
+  maxHp: 56000
+  defense: 35
+  magicResist: 17
+  xpReward: 2400
+  goldReward: 4000
+  manaOnHit: 8
+  knockbackTier: 3
+  isBoss: 1
+  bossId: 430
+  actNumber: 4
+  stageNumber: 30
+  hasPhase2: 1
+  hasPhase3: 1
+  phase2HpRatio: 0.6
+  phase3HpRatio: 0.3
+  enragedHpRatio: 0.3
+  phaseDefenseRatios:
+  - 0.35
+  - 0.28
+  - 0.2
+  patterns:
+  - patternId: P1
+    availableFromPhase: 0
+    exclusiveToPhase: 1
+    telegraphSeconds: 0.8
+    executeSeconds: 0.5
+    recoverySeconds: 1.5
+    weightPercent: 35
+    minIntervalSeconds: 5
+  - patternId: P2
+    availableFromPhase: 0
+    exclusiveToPhase: 1
+    telegraphSeconds: 1
+    executeSeconds: 0.5
+    recoverySeconds: 1.5
+    weightPercent: 25
+    minIntervalSeconds: 8
+  - patternId: P3
+    availableFromPhase: 0
+    exclusiveToPhase: 1
+    telegraphSeconds: 1
+    executeSeconds: 0.5
+    recoverySeconds: 1.5
+    weightPercent: 25
+    minIntervalSeconds: 6
+  - patternId: P4
+    availableFromPhase: 0
+    exclusiveToPhase: 1
+    telegraphSeconds: 1.5
+    executeSeconds: 0.8
+    recoverySeconds: 2
+    weightPercent: 15
+    minIntervalSeconds: 6
+  - patternId: P5
+    availableFromPhase: 1
+    exclusiveToPhase: 1
+    telegraphSeconds: 0.5
+    executeSeconds: 2
+    recoverySeconds: 1
+    weightPercent: 20
+    minIntervalSeconds: 8
+  - patternId: P6
+    availableFromPhase: 1
+    exclusiveToPhase: 1
+    telegraphSeconds: 1
+    executeSeconds: 1
+    recoverySeconds: 1.5
+    weightPercent: 25
+    minIntervalSeconds: 4
+  - patternId: P7
+    availableFromPhase: 1
+    exclusiveToPhase: 1
+    telegraphSeconds: 0.5
+    executeSeconds: 0.5
+    recoverySeconds: 2
+    weightPercent: 35
+    minIntervalSeconds: 7
+  - patternId: P9
+    availableFromPhase: 2
+    exclusiveToPhase: 1
+    telegraphSeconds: 0.5
+    executeSeconds: 5
+    recoverySeconds: 1
+    weightPercent: 30
+    minIntervalSeconds: 15
+  - patternId: P10
+    availableFromPhase: 2
+    exclusiveToPhase: 1
+    telegraphSeconds: 0.1
+    executeSeconds: 0.5
+    recoverySeconds: 2
+    weightPercent: 25
+    minIntervalSeconds: 8
+  - patternId: P11
+    availableFromPhase: 2
+    exclusiveToPhase: 1
+    telegraphSeconds: 0.1
+    executeSeconds: 0.5
+    recoverySeconds: 1.5
+    weightPercent: 45
+    minIntervalSeconds: 2
+  weakPoints: []
+  rewardTable:
+    bonusXp: 2400
+    bonusGold: 4000
+    bossSoul: 5
+    manaCrystal: 80
+    spReward: 2
+    uniqueDropId: 0
+  stageTimeLimit: 180

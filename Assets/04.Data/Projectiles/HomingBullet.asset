@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bea006ba1bd8114297b3b0a24ab8fe3, type: 3}
+  m_Name: HomingBullet
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.ProjectileData
+  id: 5
+  displayName: Homing Bullet
+  size: 0
+  speed: 10
+  blockableByFlipper: 1
+  deadZonePenalty: -5
+  homing: 1
+  slowsBallOnContact: 0
+  ballSlowMultiplier: 0.5
+  ballSlowDuration: 1
+  knockbackBallOnContact: 0
+  ballKnockbackForce: 5
+  wallBounceLimit: 0

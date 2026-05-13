@@ -12,6 +12,7 @@ TagManager:
   - Monster
   - Projectile
   - Wall
+  - WeakPoint
   layers:
   - Default
   - TransparentFX

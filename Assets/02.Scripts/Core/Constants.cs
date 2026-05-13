@@ -143,5 +143,46 @@ namespace RPGPinball.Core
 
         // ── 점감 기본 계수 (참고값, 각 스킬 SO에서 개별 지정) ──
         public const float DiminishRateDefault = 0.95f;
+
+        // ── 보스 공통 (Boss_Patterns.md §공통 규칙) ────────────
+        public const float BossEnragedHpRatio = 0.3f;
+        public const float BossEnragedAttackSpeedMul = 1.3f;
+        public const float BossEnragedDensityMul = 1.5f;
+        public const float BossEnragedRecoveryMul = 0.7f;
+        public const float BossTelegraphMin = 0.5f;
+        public const float BossTelegraphMax = 1.5f;
+        public const float BossRecoveryMin = 1.0f;
+        public const float BossRecoveryMax = 2.0f;
+
+        // ── 엘리트 공통 (Elite_Bounty_Spec.md §공통 규칙) ──────
+        public const float EliteEnragedHpRatio = 0.25f;
+        public const float EliteEnragedAttackSpeedMul = 1.5f;
+        public const float EliteRecoveryMin = 2.0f;
+        public const float EliteRecoveryMax = 3.0f;
+
+        // ── 탄막 공통 사양 (Boss_Patterns.md §탄막 공통 사양) ──
+        public const float BulletSmallRadius = 0.15f;
+        public const float BulletLargeRadius = 0.4f;
+        public const float BulletSpecialRadius = 0.6f;
+        public const float BulletSmallSpeed = 8.0f;
+        public const float BulletLargeSpeed = 6.0f;
+        public const float BulletSmallPenalty = -5f;
+        public const float BulletLargePenalty = -8f;
+        public const float BulletSpecialPenalty = -10f;
+
+        // ── 탄막 풀링 ──────────────────────────────────────────
+        public const int ProjectilePoolPrewarmSmall = 200;
+        public const int ProjectilePoolPrewarmLarge = 60;
+        public const int ProjectilePoolPrewarmSpecial = 20;
+
+        // ── 최종 보스 검증 (Damage_Formula.md §밸런스 검증) ────
+        public const float WinterQueenRequiredDps = 311f;
+
+        // ── 보스 페이즈 임계치 기본 ────────────────────────────
+        public const float BossPhase2HpRatioDefault = 0.6f;
+        public const float BossPhase3HpRatioDefault = 0.3f;
+
+        // ── 태그 (마일스톤 4) ──────────────────────────────────
+        public const string TagWeakPoint = "WeakPoint";
     }
 }
