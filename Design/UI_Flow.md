@@ -2,6 +2,8 @@
 
 게임의 씬 전환, 화면 흐름, 팝업 구조를 정의하는 문서입니다.
 
+> **기준 해상도**: **1080 × 1920** (9:16 세로형 고정) — 모든 화면·캔버스·팝업은 이 비율을 기준으로 디자인. UI Canvas 설정은 `Reference Resolution = 1080×1920, Match = 0 (Width)`. 상세는 [Resolution_Spec.md](Resolution_Spec.md) 참조.
+
 ---
 
 ## 1. 전체 씬 전환 흐름

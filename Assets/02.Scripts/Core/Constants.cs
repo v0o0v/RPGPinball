@@ -256,5 +256,131 @@ namespace RPGPinball.Core
         public const float NodeRatioHidden = 0.05f;
         public const float HiddenNodeBaseChance = 0.05f;
         public const float EliteConvertChance = 0.10f;
+
+        // ─────────────────────────────────────────────────────────
+        // 마일스톤 6: 마을 시설 & 메타 시스템
+        // ─────────────────────────────────────────────────────────
+
+        // ── §대장간 ────────────────────────────────────────────
+        public const int MaterialSwapGoldCost = 100;
+        public const int FlipperVariantChangeGoldCost = 3000;
+        public const int FlipperMaxLevel = 10;
+        public const int CoreMaxLevel = 5;
+        public const int CoreSlotsMain = 1;
+        public const int CoreSlotsSub = 2;
+        public const int FlipperVariantUnlockLevel = 4;
+
+        // ── §룬 ────────────────────────────────────────────────
+        public const int RuneFuseRequiredCount = 3;
+        public const float RuneGradeNormalMul = 1.0f;
+        public const float RuneGradeRareMul = 1.5f;
+        public const float RuneGradeLegendaryMul = 2.25f;
+        public const int RuneFuseGoldNormalToRare = 200;
+        public const int RuneFuseGoldRareToLegendary = 500;
+        public const int RuneSocketTier1 = 0;
+        public const int RuneSocketTier2to4 = 1;
+        public const int RuneSocketTier5to6 = 2;
+
+        // ── §타로카드 ──────────────────────────────────────────
+        public const int TarotPullGoldCost = 500;
+        public const int TarotPullBossSoulCost = 3;
+        public const int TarotEquipSlots = 3;
+        public const int TarotPermanentRequiredCount = 10;
+        public const int TarotPermanentGoldCost = 5000;
+        public const float TarotDropCommonPct = 60f;
+        public const float TarotDropRarePct = 25f;
+        public const float TarotDropLegendaryPct = 10f;
+        public const float TarotDropMythicPct = 5f;
+
+        // ── §의뢰 ──────────────────────────────────────────────
+        public const int DailyQuestSlotCount = 3;
+        public const int DailyQuestRefreshHourKst = 0;
+        public const int BountySlotCount = 3;
+        public const int WeeklyQuestRewardGold = 2000;
+        public const int DailyQuestRewardGoldPerOne = 300;
+
+        // ── §열기구 ────────────────────────────────────────────
+        public const int BalloonUpgrade1Gold = 1000;
+        public const int BalloonUpgrade1Mana = 30;
+        public const int BalloonUpgrade2Gold = 3000;
+        public const int BalloonUpgrade2Mana = 80;
+        public const int BalloonUpgrade3Gold = 8000;
+        public const int BalloonUpgrade3Mana = 200;
+        public const int BalloonStartingManaBonus = 20;
+        public const float BalloonBossStartingTimeBonus = 10f;
+        public const float BalloonHiddenChanceBonus = 0.15f;
+
+        // ── §용병단 ────────────────────────────────────────────
+        public const int MercenarySlotCount = 2;
+        public const float EmergencyShieldDuration = 5f;
+        public const float SandsOfTimeBonusSeconds = 15f;
+        public const float FrenzyCharmDamageMultiplier = 2.0f;
+        public const float FrenzyCharmSpeedMultiplier = 1.5f;
+        public const float FrenzyCharmDuration = 10f;
+
+        // ── §수련장 ────────────────────────────────────────────
+        public const int SkillResetCost1 = 0;
+        public const int SkillResetCost2 = 1000;
+        public const int SkillResetCost3 = 3000;
+        public const int SkillResetCost4 = 5000;
+        public const int SkillDeckSlotCount = 4;
+        public const int UltimateSkillMaxInDeck = 1;
+
+        // ── §도감 ──────────────────────────────────────────────
+        public const int GimmickResistThreshold1 = 1;
+        public const int GimmickResistThreshold2 = 3;
+        public const int GimmickResistThreshold3 = 7;
+        public const int GimmickResistThreshold4 = 15;
+        public const int GimmickResistThreshold5 = 30;
+        public const float GimmickResistReductionPerLevel = 0.1f;
+        public const int CollectionMilestone10Gold = 1000;
+        public const int CollectionMilestone40Gold = 0;
+        public const int CollectionMilestone80LegendaryTarot = 1;
+
+        // ── §경제 ──────────────────────────────────────────────
+        public const int BossGoldBase = 300;
+        public const float ActMultiplier1 = 1.0f;
+        public const float ActMultiplier2 = 1.8f;
+        public const float ActMultiplier3 = 2.5f;
+        public const float ActMultiplier4 = 3.5f;
+        public const int BossSoulNormal = 2;
+        public const int BossSoulFinal = 5;
+        public const int EliteGoldMin = 30;
+        public const int EliteGoldMax = 50;
+        public const float GradeBonusS = 1.3f;
+        public const float GradeBonusA = 1.0f;
+        public const float GradeBonusB = 0.8f;
+        public const float GradeBonusC = 0.5f;
+        public const int StageGoldBase = 50;
+        public const int StageGoldPerStage = 10;
+        public const int StageManaCrystalBase = 5;
+        public const int StageManaCrystalPerFiveStages = 1;
+
+        // ── §해상도 (2026-05-15 픽스) ──────────────────────────
+        // Design/Resolution_Spec.md 와 1:1 동기화. 변경 시 Player Settings 도 같이 수정.
+        public const int ScreenWidthPx = 1080;
+        public const int ScreenHeightPx = 1920;
+        public const float ScreenAspect = 9f / 16f;        // 0.5625 (width/height)
+        public const int UIReferenceWidth = 1080;          // Canvas Scaler Reference Resolution
+        public const int UIReferenceHeight = 1920;
+        public const float UICanvasMatchWidthOrHeight = 0f; // 0 = Width, 1 = Height
+        // Village 씬 카메라 권장 ortho
+        public const float CameraOrthoVillage = 10f;
+        // Title/Result 씬 카메라 권장 ortho
+        public const float CameraOrthoMenu = 5.625f;
+
+        // ── §자산 경로 ─────────────────────────────────────────
+        public const string KennyRunePackRoot = "Assets/50. External Assets/kenny/kenney_rune-pack/PNG";
+        public const string KennyMedalsRoot = "Assets/50. External Assets/kenny/kenney_medals/PNG";
+        public const string KennyPlatformerItemsRoot = "Assets/50. External Assets/kenny/kenney_platformer-art-deluxe/Base pack/Items";
+        public const string KennyBlockPackRoot = "Assets/50. External Assets/kenny/kenney_block-pack/PNG/Default (64px)";
+        public const string KennyBallAssetsRoot = "Assets/50. External Assets/kenny/kenney_rolling-ball-assets/PNG/Default";
+        public const string KennyShapeCharsRoot = "Assets/50. External Assets/kenny/kenney_shape-characters/PNG/Default";
+
+        // 영구 카드: 색상 (TarotGrade frameColor 매핑)
+        public static readonly Color TarotFrameColorCommon = new Color(0.69f, 0.69f, 0.69f, 1f);    // #B0B0B0
+        public static readonly Color TarotFrameColorRare = new Color(0.29f, 0.56f, 0.89f, 1f);     // #4A90E2
+        public static readonly Color TarotFrameColorLegendary = new Color(0.61f, 0.35f, 0.71f, 1f); // #9B59B6
+        public static readonly Color TarotFrameColorMythic = new Color(0.95f, 0.77f, 0.25f, 1f);   // #F1C40F
     }
 }

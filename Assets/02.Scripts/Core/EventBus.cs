@@ -288,4 +288,168 @@ namespace RPGPinball.Core
         public float Seconds;
         public string Source; // "RestNode" / "Gimmick" 등
     }
+
+    // ── 마일스톤 6 이벤트 (Village / Meta) ─────────────────────
+
+    /// <summary>범용 통화 변경. EconomyManager 가 모든 차감/지급 시 발행.</summary>
+    public struct OnCurrencyChanged
+    {
+        public Data.CurrencyId CurrencyId;
+        public long Delta;
+        public long NewBalance;
+        public string Reason;
+    }
+
+    public struct OnForgeBallChanged
+    {
+        public Data.BallMaterialId MaterialId;
+    }
+
+    public struct OnFlipperUpgraded
+    {
+        public int NewLevel;
+    }
+
+    public struct OnFlipperVariantSelected
+    {
+        public Data.FlipperVariantId VariantId;
+    }
+
+    public struct OnRuneEquipped
+    {
+        public Data.RuneId RuneId;
+        public Data.RuneGrade Grade;
+        public string EquippedOnSkillId;
+    }
+
+    public struct OnRuneUnequipped
+    {
+        public Data.RuneId RuneId;
+        public Data.RuneGrade Grade;
+        public string EquippedOnSkillId;
+    }
+
+    public struct OnRuneFused
+    {
+        public Data.RuneId RuneId;
+        public Data.RuneGrade FromGrade;
+        public Data.RuneGrade ToGrade;
+    }
+
+    public struct OnTarotPulled
+    {
+        public Data.TarotCardId[] CardIds;
+        public Data.TarotGrade[] Grades;
+    }
+
+    public struct OnTarotEquipped
+    {
+        public Data.TarotCardId CardId;
+        public int SlotIndex;
+    }
+
+    public struct OnTarotUnequipped
+    {
+        public Data.TarotCardId CardId;
+        public int SlotIndex;
+    }
+
+    public struct OnTarotPermanentUpgraded
+    {
+        public Data.TarotCardId CardId;
+    }
+
+    public struct OnGimmickResistanceLevelUp
+    {
+        public Data.GimmickId GimmickId;
+        public int NewResistLevel;
+    }
+
+    public struct OnDailyQuestRolled
+    {
+        public string[] QuestIds;
+    }
+
+    public struct OnQuestProgress
+    {
+        public string QuestId;
+        public int CurrentProgress;
+        public int Target;
+    }
+
+    public struct OnQuestCompleted
+    {
+        public string QuestId;
+        public Data.QuestKind Kind;
+    }
+
+    public struct OnBountyAccepted
+    {
+        public string BountyId;
+        public Data.EliteId EliteId;
+    }
+
+    public struct OnConsumableCrafted
+    {
+        public Data.ConsumableId ConsumableId;
+    }
+
+    public struct OnConsumableUsed
+    {
+        public Data.ConsumableId ConsumableId;
+    }
+
+    public struct OnBalloonUpgraded
+    {
+        public int NewLevel;
+        public Data.BalloonUpgradeId UpgradeId;
+    }
+
+    public struct OnSkillDeckEquipped
+    {
+        public int SlotIndex;
+        public int SkillId;
+    }
+
+    /// <summary>몬스터/보스가 회복했음을 알림. M6 도감/UI 카운트용.</summary>
+    public struct OnMonsterHealed
+    {
+        public UnityEngine.GameObject Monster;
+        public int Amount;
+        public Data.HealSource Source;
+    }
+
+    /// <summary>이벤트 노드(보물방/제단/도박/여행자)에서 발행한 보상.</summary>
+    public struct OnNodeReward
+    {
+        public Data.NodeKind NodeKind;
+        public Data.EventNodeRewardKind RewardKind;
+        public int Amount;
+    }
+
+    /// <summary>엘리트 처치 보상 트리거. EconomyManager 가 구독해 고유 코어 조각 등 자동 지급.</summary>
+    public struct OnEliteDefeated
+    {
+        public UnityEngine.GameObject Elite;
+        public Data.EliteId EliteId;
+        public bool IsBountyActive;
+    }
+
+    /// <summary>스테이지 클리어. M5의 OnStageClear 를 보강하는 보상 계산 페이로드. (기존 OnStageClear 는 그대로 유지)</summary>
+    public struct OnStageCleared
+    {
+        public Data.ActId ActId;
+        public int StageIndex;
+        public string Grade;
+    }
+
+    public struct OnFlipperSummoned
+    {
+        public UnityEngine.Vector2 Position;
+    }
+
+    public struct OnBallForceReset
+    {
+        public Data.GimmickId? Cause;
+    }
 }

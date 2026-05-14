@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20fca01542b0d7f49bfe963178337d8e, type: 3}
+  m_Name: FlipperUpgradeTable
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.FlipperUpgradeTable
+  levels:
+  - cooldownReductionPercent: 0
+    reboundBonusPercent: 0
+    manaCrystalCost: 0
+    bossSoulCost: 0
+    unlocksVariantChoice: 0
+  - cooldownReductionPercent: 0.03
+    reboundBonusPercent: 0.05
+    manaCrystalCost: 50
+    bossSoulCost: 3
+    unlocksVariantChoice: 0
+  - cooldownReductionPercent: 0.06
+    reboundBonusPercent: 0.1
+    manaCrystalCost: 80
+    bossSoulCost: 5
+    unlocksVariantChoice: 0
+  - cooldownReductionPercent: 0.09
+    reboundBonusPercent: 0.15
+    manaCrystalCost: 120
+    bossSoulCost: 8
+    unlocksVariantChoice: 1
+  - cooldownReductionPercent: 0.12
+    reboundBonusPercent: 0.2
+    manaCrystalCost: 180
+    bossSoulCost: 10
+    unlocksVariantChoice: 0
+  - cooldownReductionPercent: 0.15
+    reboundBonusPercent: 0.25
+    manaCrystalCost: 250
+    bossSoulCost: 12
+    unlocksVariantChoice: 0
+  - cooldownReductionPercent: 0.16
+    reboundBonusPercent: 0.3
+    manaCrystalCost: 320
+    bossSoulCost: 15
+    unlocksVariantChoice: 0
+  - cooldownReductionPercent: 0.17
+    reboundBonusPercent: 0.35
+    manaCrystalCost: 380
+    bossSoulCost: 16
+    unlocksVariantChoice: 0
+  - cooldownReductionPercent: 0.18
+    reboundBonusPercent: 0.4
+    manaCrystalCost: 450
+    bossSoulCost: 18
+    unlocksVariantChoice: 0
+  - cooldownReductionPercent: 0.2
+    reboundBonusPercent: 0.5
+    manaCrystalCost: 500
+    bossSoulCost: 20
+    unlocksVariantChoice: 0
+  variantChangeGoldCost: 3000
+  variants: []

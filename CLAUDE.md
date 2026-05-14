@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **RPG 핀볼 (가칭)** — Unity 6 (6000.4.0f1)로 개발 중인 Android(세로 화면) RPG + 로그라이크 + 핀볼 액션 게임. 터치로 플리퍼를 즉석 소환해 보스를 토벌하는 타임어택 구조.
 
+**해상도**: **1080×1920 (9:16 세로형) 고정** (2026-05-15 픽스). Player Settings의 `defaultScreenWidth/Height`, `defaultInterfaceOrientation=Portrait`, 그리고 Game View 프리셋 `RPG Pinball 1080x1920`(Android 그룹) 모두 적용 완료. 회전 잠금(Portrait만 허용). 모든 UI/카메라 ortho/씬 레이아웃은 이 비율을 기준으로 설계. 상세는 [Design/Resolution_Spec.md](Design/Resolution_Spec.md) 참조.
+
 현재 상태: **사용자 작성 코드 0줄**. `Assets/02.Scripts/` 폴더가 비어 있음(서드파티 ProCamera2D만 존재). 과거 git log에는 BallController/FlipperController/GameManager/ScoreDisplay 등 일부 프로토타입 커밋이 있으나 현재 워킹트리에는 남아 있지 않음 — 어느 시점에 정리됨. 따라서 마일스톤 1(코어 핀볼 프로토타입)을 **백지 상태에서** 시작한다고 보면 됨. 8개 마일스톤 전체가 미구현 상태이며, 모든 시스템(코어/보안/물리/전투/스킬 트리/보스 AI/절차적 생성/마을 시설)은 설계 문서에만 존재.
 
 ## 핵심 디렉토리 구조

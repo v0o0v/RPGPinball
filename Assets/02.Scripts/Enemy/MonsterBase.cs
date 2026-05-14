@@ -132,6 +132,23 @@ namespace RPGPinball.Enemy
             ApplyDamage(result);
         }
 
+        /// <summary>
+        /// 마일스톤 6 신규: 보스/엘리트가 자체 회복할 때 호출 (광합성/촉수재생/잠수 자힐 등).
+        /// 외부 시그니처는 변경 없음 — Hp 프로퍼티/ApplyDamage 영향 없음.
+        /// </summary>
+        public virtual void Heal(int amount, HealSource source)
+        {
+            if (IsDead || data == null || amount <= 0) return;
+            int newHp = Mathf.Clamp(hp.Value + amount, 0, data.maxHp);
+            hp = SafeInt.Create(newHp);
+            EventBus.Publish(new OnMonsterHealed
+            {
+                Monster = gameObject,
+                Amount = amount,
+                Source = source
+            });
+        }
+
         public void ApplyDamage(DamageResult result)
         {
             if (IsDead) return;

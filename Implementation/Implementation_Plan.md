@@ -23,6 +23,7 @@
 | **아트 리소스** | 플레이스홀더로 시작 → 이후 교체                                        |
 | **데이터 보안** | 세이브 데이터 암호화 + 메모리 값 난독화 (안티치트)                     |
 | **데드존 메커닉** | **삭제** (2026-05-13) — 스테이지 외벽이 닫힌 통이므로 공은 절대 떨어지지 않음. 자연 낙사 페널티(-10/-20초) 제거. 보스/탄막/기믹이 직접 발행하는 시간 페널티(-5초·-15초 등)만 유지. 보스 강제 낙사 패턴(서리거인 거대 주먹·겨울 여왕 절대 영도)은 "공 위치 reset + 시간 페널티"로 의미 변경. |
+| **해상도** | **1080 × 1920 (9:16 세로형 고정)** (2026-05-15 픽스) — Player Settings + Game View 프리셋 `RPG Pinball 1080x1920` 적용 완료. Portrait만 허용 (회전 잠금). UI Canvas는 `Reference 1080×1920, Match=0(Width)`. 상세 사양은 [Design/Resolution_Spec.md](../Design/Resolution_Spec.md) 참조. |
 
 ## 기술 스택
 
@@ -35,7 +36,47 @@
 | 카메라      | ProCamera2D (공 추적, 줌, 바운딩)               |
 | 저장        | AES-256 암호화 JSON + HMAC-SHA256 무결성 검증   |
 | 메모리 보안 | 난독화 래퍼 타입 (SafeInt, SafeFloat)           |
-| 플랫폼      | Android (세로 화면)                             |
+| 플랫폼      | Android (세로 화면 — 1080×1920 고정, Portrait Only) |
+
+---
+
+## 공용 검증 원칙 (모든 마일스톤 공통)
+
+> 2026-05-15 마을 시설 클릭 미동작 회고 후 추가. 마일스톤 완료 보고 직전 반드시 충족.
+
+### 🚨 입력 경로(End-to-End) 검증 필수
+- 이벤트(`EventBus.Publish`, `delegate.Invoke`)를 직접 발행해 검증을 우회하지 말 것.
+- **사용자 입력 경로 전체**를 시뮬레이션: `Input → Collider Raycast → MonoBehaviour 이벤트(OnMouseDown/OnTrigger/onClick) → 다운스트림 핸들러`
+- 입력 트리거 컴포넌트가 있는 GameObject는 다음 셋 모두 검증:
+  1. `Physics2D.OverlapPoint(target.transform.position)` 가 해당 Collider를 감지
+  2. `Camera.WorldToScreenPoint → ScreenToWorldPoint` 라운드트립으로 화면 안에 위치
+  3. 핸들러(OnMouseDown 등)를 reflection으로 강제 호출 시 다운스트림 이벤트 정상 발행
+
+### 🚨 씬 GameObject 직렬화 검증 필수
+- `manage_gameobject create`의 `component_properties`로 SerializeField를 설정한 직후, **모든 의도값이 실제 적용됐는지 SerializedObject 또는 reflection으로 재확인**
+- **enum / Sprite / SO 참조** 등은 종종 적용되지 않음 → 그대로 두면 기본값으로 남음
+- Collider2D(`BoxCollider2D`, `PolygonCollider2D` 등)를 자동 추가했으면 `bounds.size > 0` 확인. **Sprite를 늦게 할당하면 Reset 시점에 size=0으로 남음**
+- 미적용 발견 시 SerializedObject로 영구 적용:
+  ```csharp
+  var so = new SerializedObject(component);
+  so.FindProperty("facility").enumValueIndex = (int)expected;
+  so.ApplyModifiedPropertiesWithoutUndo();
+  EditorSceneManager.MarkSceneDirty(...); EditorSceneManager.SaveScene(...);
+  ```
+
+### EditMode 단위 테스트만으로 완료 보고 금지
+- 단위 테스트 통과는 **로직 무결성**만 증명. **통합 경로**는 별도 검증 필요
+- "PlayMode 시나리오 N건"이라 해도 모두 이벤트 직접 발행이면 통합 검증 안 된 것
+- 마일스톤 완료 보고 시 다음을 명시:
+  - [ ] EditMode N/N 통과
+  - [ ] 씬 GameObject 직렬화 재확인 (Serialized 필드 값 일치)
+  - [ ] 모든 Collider bounds.size > 0
+  - [ ] 입력 트리거 컴포넌트 OverlapPoint 통과
+  - [ ] 입력 → 핸들러 → 다운스트림 이벤트 체인 1회 이상 통합 검증
+
+### 시각 확인 한계
+- Game View 캡쳐(`manage_camera screenshot`)는 **IMGUI(OnGUI)를 포함하지 않음** (카메라 직접 패스)
+- IMGUI 디버그 UI / Screen Space - Overlay Canvas 표시 여부는 사용자 직접 확인 필요. **그 외 모든 검증 가능 항목은 코드로 검증한 뒤 보고**
 
 ---
 
@@ -399,9 +440,11 @@ Assets/
 
 ---
 
-## 마일스톤 6: 마을 시설 & 메타 시스템 (3주)
+## 마일스톤 6: 마을 시설 & 메타 시스템 (3주) — **코어 골격 완료 (2026-05-14)**
 
 > **목표**: 6개 마을 시설 + 재화 + 의뢰 + 도감 + 타로카드
+>
+> **진척**: 매니저 10종 (EconomyManager/ForgeManager/EnchanterManager/AstrologerManager/CollectionManager/QuestManager/TavernManager/BalloonManager/MercenaryManager/TrainingManager) + DamageCalculator [5][6][7] 활성 + Village 씬 + Kenney 스프라이트 매핑 + EditMode 51건(누적 185/185 통과) 완료. **SO 인스턴스 풀**(타로 38장 / 룬 9종 / 코어 6종 / 재질 4종 / 의뢰 풀 등)과 **정식 UI** 는 M7-M8 인계. 상세는 [Milestone6_TODO.md](Milestone6_TODO.md) §13.3 / §14.
 >
 > **[인계: M2]** `DamageCalculator` 단계 [5] 플리퍼 파생형 효과(대장간), 단계 [6] 룬 효과(마법 부여소), 단계 [7] 타로카드 효과(점성술사).
 >

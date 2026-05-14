@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e049db2776b76749a2805d8f6f97b9c, type: 3}
+  m_Name: CurrencyIconRegistry
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.CurrencyIconRegistry
+  entries:
+  - id: 1
+    icon: {fileID: -4477380204327327266, guid: 1e905f6d67b210c459b32ce376cd832a, type: 3}
+    tint: {r: 1, g: 1, b: 1, a: 1}
+  - id: 2
+    icon: {fileID: -5726572761916440628, guid: 0262253e2322a9f4d925ac58513a6b9d, type: 3}
+    tint: {r: 1, g: 1, b: 1, a: 1}
+  - id: 3
+    icon: {fileID: -7644174140078258810, guid: 5a7c9b9f5c54a1245811e09deeea8b87, type: 3}
+    tint: {r: 0.69, g: 0.25, b: 0.88, a: 1}
+  - id: 4
+    icon: {fileID: 3160125861964226427, guid: aad77545e7ef4c743ae8e0eb642218e2, type: 3}
+    tint: {r: 1, g: 1, b: 1, a: 1}
+  - id: 5
+    icon: {fileID: -8129527155744968792, guid: 32134a33855bc0a4e8ea55f73598f121, type: 3}
+    tint: {r: 1, g: 1, b: 1, a: 1}
+  - id: 6
+    icon: {fileID: 2083712176797354065, guid: 9b723fba90626004982fe50bbb259c36, type: 3}
+    tint: {r: 1, g: 1, b: 1, a: 1}

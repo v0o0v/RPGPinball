@@ -63,31 +63,100 @@ namespace RPGPinball.Combat
             else if (ctx.IsMithrilBall && ctx.DamageType == DamageType.Magic)
                 damage *= Constants.MithrilMagicMultiplier;
 
-            // [5] 플리퍼 파생형 — 마일스톤 6에서 채움
+            // [5] 플리퍼 파생형
             damage *= ctx.FlipperDerivativeMultiplier;
+            // 충격파 플리퍼 2차 광역 데미지: 본체 0.5x 곱연산은 외부 ShockwaveDamageApplier 가 컨텍스트 빌드 시 직접 곱해서 넣음
+            // (여기서는 슬롯 값 그대로 반영)
 
-            // [6] 룬 효과 — 마일스톤 6에서 채움
-            damage *= ctx.RuneMultiplier;
-
-            // [7] 타로카드 — 마일스톤 6에서 채움
-            damage *= ctx.TarotMultiplier;
-
-            // [8] 크리티컬 판정
-            bool isCritical = false;
-            float critChance = Mathf.Clamp01(ctx.CritChance + ctx.CritChanceBonus);
-            // 약점 부위 타격 시 크리티컬 확률 추가
-            if (ctx.IsWeakPointHit) critChance += ctx.WeakPointCritBonus;
-            critChance = Mathf.Clamp01(critChance);
-
-            if (critChance > 0f && Random.value < critChance)
+            // [6] 룬 효과 — 처형자(HP≤30%), 역경(시간≤60), 등급 multiplier 합성
+            float runeMul = ctx.RuneMultiplier;
+            if (ctx.EquippedRuneIds != null && ctx.EquippedRuneIds.Length > 0)
             {
-                damage *= ctx.CritMultiplier > 0f ? ctx.CritMultiplier : Constants.CritMultiplierDefault;
-                isCritical = true;
+                for (int i = 0; i < ctx.EquippedRuneIds.Length; i++)
+                {
+                    var rId = ctx.EquippedRuneIds[i];
+                    var grade = (ctx.EquippedRuneGrades != null && i < ctx.EquippedRuneGrades.Length)
+                        ? ctx.EquippedRuneGrades[i]
+                        : RuneGrade.Normal;
+                    float gradeMul = grade == RuneGrade.Normal ? 1.0f
+                                   : grade == RuneGrade.Rare ? 1.5f
+                                   : 2.25f;
+
+                    switch (rId)
+                    {
+                        case RuneId.Executioner:
+                            if (ctx.TargetCurrentHpRatio > 0f && ctx.TargetCurrentHpRatio <= 0.3f)
+                                runeMul *= 2.0f * gradeMul;
+                            break;
+                        case RuneId.Adversity:
+                            if (ctx.RemainingTimeSeconds <= 60f)
+                                runeMul *= 1.5f * gradeMul;
+                            break;
+                        // Chain/Spread/Pierce/Homing/Element 전환은 ActiveSkillBase 측 합성
+                        default: break;
+                    }
+                }
+            }
+            damage *= runeMul;
+
+            // [7] 타로카드 — 단계 분기
+            float tarotMul = ctx.TarotMultiplier;
+            if (ctx.EquippedTarotCardIds != null && ctx.EquippedTarotCardIds.Length > 0)
+            {
+                foreach (var cId in ctx.EquippedTarotCardIds)
+                {
+                    switch (cId)
+                    {
+                        case TarotCardId.C07_WarriorBracelet:
+                            if (ctx.DamageType == DamageType.Physical) damage *= 1.08f;
+                            break;
+                        case TarotCardId.R05_ElementalAmplifier:
+                            if (ctx.DamageType == DamageType.Magic) tarotMul *= 1.15f;
+                            break;
+                        case TarotCardId.R08_SteelWill:
+                            if (ctx.RemainingTimeSeconds <= 60f) tarotMul *= 1.20f;
+                            break;
+                        case TarotCardId.L03_DoomSeal:
+                            if (ctx.TargetCurrentHpRatio > 0f && ctx.TargetCurrentHpRatio <= 0.2f) tarotMul *= 1.50f;
+                            break;
+                        // R02/R04 등은 별도 시스템 적용 (크리티컬·플리퍼 쿨타임 등)
+                        default: break;
+                    }
+                }
+            }
+            damage *= tarotMul;
+
+            // 전역 데미지 배율 (광란의 부적 등)
+            if (ctx.GlobalDamageMultiplier > 0f && ctx.GlobalDamageMultiplier != 1f)
+            {
+                damage *= ctx.GlobalDamageMultiplier;
             }
 
-            // [9] 방어력 / 마법 저항력 감산 (아머 크래시 적용)
+            // [8] 크리티컬 판정 (충격파 2차 데미지는 미적용)
+            bool isCritical = false;
+            if (!ctx.IsShockwaveSecondaryHit)
+            {
+                float critChance = Mathf.Clamp01(ctx.CritChance + ctx.CritChanceBonus);
+                // 약점 부위 타격 시 크리티컬 확률 추가
+                if (ctx.IsWeakPointHit) critChance += ctx.WeakPointCritBonus;
+                critChance = Mathf.Clamp01(critChance);
+
+                if (critChance > 0f && Random.value < critChance)
+                {
+                    damage *= ctx.CritMultiplier > 0f ? ctx.CritMultiplier : Constants.CritMultiplierDefault;
+                    isCritical = true;
+                }
+            }
+
+            // [9] 방어력 / 마법 저항력 감산 (아머 크래시·가시 플리퍼 DEF 디버프 적용)
             int reduction = ctx.DamageType == DamageType.Magic ? ctx.TargetMagicResist : ctx.TargetDefense;
-            float effectiveReduction = reduction * (1f - Mathf.Clamp01(ctx.ArmorReductionPercent));
+            float armorReduction = Mathf.Clamp01(ctx.ArmorReductionPercent);
+            if (ctx.IsSpikeDebuffActive)
+            {
+                // 가시 플리퍼 디버프: DEF -10% (방어력 감산값의 10% 추가 감산)
+                armorReduction = Mathf.Clamp01(armorReduction + 0.10f);
+            }
+            float effectiveReduction = reduction * (1f - armorReduction);
             damage -= effectiveReduction;
 
             // [10] 최종 클램프
@@ -201,6 +270,22 @@ namespace RPGPinball.Combat
         public float RuneMultiplier;
         public float TarotMultiplier;
 
+        // 플리퍼 파생형
+        public FlipperVariantId FlipperVariantId;
+        public bool IsSpikeDebuffActive;           // 가시 플리퍼 디버프 5초 적용 중인지
+        public bool IsShockwaveSecondaryHit;       // 충격파로 발생한 2차 데미지(크리티컬 미적용)
+        // 룬/타로 ID 목록 (DamageCalculator/ActiveSkillBase가 합성용으로 사용)
+        public RuneId[] EquippedRuneIds;
+        public RuneGrade[] EquippedRuneGrades;
+        public TarotCardId[] EquippedTarotCardIds;
+        // 룬 효과로 채워지는 원소 오버라이드 / 마나 비용 배율 (스킬 ActiveSkillBase가 사용)
+        public ElementOverride ElementOverride;
+        public float ManaCostMultiplier;
+        // 타이머 잔여 시간 (역경의 룬 / R-08 강철의 의지 등)
+        public float RemainingTimeSeconds;
+        // 전역 데미지 배율 (광란의 부적 등)
+        public float GlobalDamageMultiplier;
+
         // ── 크리티컬 ────────────────────────────────────────
         public float CritChance;
         public float CritMultiplier;
@@ -244,7 +329,17 @@ namespace RPGPinball.Combat
                 CritChance = Constants.CritChanceDefault,
                 CritMultiplier = Constants.CritMultiplierDefault,
                 TargetDefense = 0,
-                TargetMagicResist = 0
+                TargetMagicResist = 0,
+                FlipperVariantId = FlipperVariantId.Basic,
+                IsSpikeDebuffActive = false,
+                IsShockwaveSecondaryHit = false,
+                EquippedRuneIds = System.Array.Empty<RuneId>(),
+                EquippedRuneGrades = System.Array.Empty<RuneGrade>(),
+                EquippedTarotCardIds = System.Array.Empty<TarotCardId>(),
+                ElementOverride = ElementOverride.None,
+                ManaCostMultiplier = 1f,
+                RemainingTimeSeconds = 999f,
+                GlobalDamageMultiplier = 1f
             };
         }
     }
