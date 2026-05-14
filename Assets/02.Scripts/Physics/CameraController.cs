@@ -1,5 +1,6 @@
 using UnityEngine;
 using RPGPinball.Core;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 namespace RPGPinball.Physics
 {
@@ -8,7 +9,9 @@ namespace RPGPinball.Physics
     /// 보스전 줌아웃 ×1.2는 마일스톤 4에서 활용.
     /// ProCamera2D와 같은 카메라에 부착 시 충돌 회피를 위해 변경이 필요할 때만 사이즈 조작.
     /// 사이즈 변경이 끝나면 ProCamera2D에 다시 위임.
+    /// 스테이지 경계 클램프는 ProCamera2D 갱신 이후에 적용되도록 ScriptExecutionOrder 를 큰 값으로 지정.
     /// </summary>
+    [DefaultExecutionOrder(10000)]
     public class CameraController : MonoBehaviour
     {
         public static CameraController Instance { get; private set; }
@@ -23,10 +26,17 @@ namespace RPGPinball.Physics
         [SerializeField] private int activeBallCount = 1;
         [SerializeField] private bool inBossFight;
 
+        private ProCamera2D proCamera;
+
         private float targetSize;
         private float currentVelocity;
         // ProCamera2D와의 충돌 회피: 사이즈 조작이 실제 필요한 경우에만 활성
         private bool sizeControlActive;
+
+        // ── 스테이지 경계 (FitToStageBounds 로 설정) ──────────
+        private bool stageBoundsActive;
+        private float stageMinY, stageMaxY;
+        private float stageCenterX;
 
         private void Awake()
         {
@@ -44,38 +54,68 @@ namespace RPGPinball.Physics
             }
             targetSize = baseOrthographicSize;
             sizeControlActive = false;
+
+            proCamera = GetComponent<ProCamera2D>();
+            if (proCamera == null && targetCamera != null) proCamera = targetCamera.GetComponent<ProCamera2D>();
         }
 
         private void OnEnable()
         {
+            // 도메인 리로드/씬 재진입 시 Instance 가 null 인 채 유지되는 케이스 보정.
+            if (Instance == null) Instance = this;
             EventBus.Subscribe<OnBallCountChanged>(HandleBallCountChanged);
         }
 
         private void OnDisable()
         {
             EventBus.Unsubscribe<OnBallCountChanged>(HandleBallCountChanged);
+            // Instance 해제는 OnDestroy 로 늦춤 (OnDisable 시점에는 다른 컴포넌트가 여전히 참조할 수 있음).
+        }
+
+        private void OnDestroy()
+        {
             if (Instance == this) Instance = null;
         }
 
         private void LateUpdate()
         {
-            // 사이즈 변경이 필요 없으면 ProCamera2D에 양보 (transform/size 모두 건드리지 않음)
-            if (!sizeControlActive || targetCamera == null) return;
+            if (targetCamera == null) return;
 
-            float current = targetCamera.orthographicSize;
-            float newSize = Mathf.SmoothDamp(current, targetSize, ref currentVelocity, smoothTime);
-            targetCamera.orthographicSize = newSize;
-
-            // 목표 사이즈에 충분히 가까우면 사이즈 제어 종료 → ProCamera2D 위임
-            if (Mathf.Abs(newSize - targetSize) < sizeEpsilon)
+            // 1) 줌 스무딩 (필요 시)
+            if (sizeControlActive)
             {
-                targetCamera.orthographicSize = targetSize;
-                currentVelocity = 0f;
-                // 베이스로 복귀했으면 완전 양보
-                if (Mathf.Abs(targetSize - baseOrthographicSize) < sizeEpsilon)
+                float current = targetCamera.orthographicSize;
+                float newSize = Mathf.SmoothDamp(current, targetSize, ref currentVelocity, smoothTime);
+                targetCamera.orthographicSize = newSize;
+
+                if (Mathf.Abs(newSize - targetSize) < sizeEpsilon)
                 {
-                    sizeControlActive = false;
+                    targetCamera.orthographicSize = targetSize;
+                    currentVelocity = 0f;
+                    if (Mathf.Abs(targetSize - baseOrthographicSize) < sizeEpsilon)
+                        sizeControlActive = false;
                 }
+            }
+
+            // 2) 스테이지 경계 클램프 (ProCamera2D 갱신 이후 후처리)
+            if (stageBoundsActive)
+            {
+                var p = targetCamera.transform.position;
+                p.x = stageCenterX;
+
+                float halfH = targetCamera.orthographicSize;
+                if (stageMaxY - stageMinY <= halfH * 2f)
+                {
+                    // 스테이지가 화면보다 짧으면 중앙 고정
+                    p.y = (stageMinY + stageMaxY) * 0.5f;
+                }
+                else
+                {
+                    float minCamY = stageMinY + halfH;
+                    float maxCamY = stageMaxY - halfH;
+                    p.y = Mathf.Clamp(p.y, minCamY, maxCamY);
+                }
+                targetCamera.transform.position = p;
             }
         }
 
@@ -83,6 +123,76 @@ namespace RPGPinball.Physics
         {
             baseOrthographicSize = size;
             RecalculateTargetSize();
+        }
+
+        /// <summary>
+        /// 카메라 OrthoSize를 스테이지 폭(worldWidth)에 정확히 맞춤. Camera.aspect 기반.
+        /// 세로 화면(모바일)에서 좌·우 외벽이 화면 가장자리에 닿도록 한다.
+        /// 호출 직후 카메라 X를 centerX로 고정(좌우 추적 비활성과 짝).
+        /// stageBottomY/stageTopY 를 전달하면 상·하 외벽 너머가 보이지 않도록 LateUpdate 에서 Y 클램프.
+        /// </summary>
+        public void FitToStageBounds(float worldWidth, float centerX, float stageBottomY, float stageTopY)
+        {
+            if (targetCamera == null) targetCamera = Camera.main;
+            if (targetCamera == null || worldWidth <= 0f) return;
+
+            float aspect = targetCamera.aspect;
+            if (aspect <= 0f) return;
+
+            // 가로 반폭 = OrthoSize × aspect → OrthoSize = worldWidth/2 / aspect
+            float requiredOrthoSize = (worldWidth * 0.5f) / aspect;
+            baseOrthographicSize = requiredOrthoSize;
+            targetCamera.orthographicSize = requiredOrthoSize;
+            targetSize = requiredOrthoSize;
+            sizeControlActive = false;
+
+            stageCenterX = centerX;
+            // 카메라 X 고정 (Y/Z는 유지)
+            var p = targetCamera.transform.position;
+            p.x = centerX;
+            targetCamera.transform.position = p;
+
+            if (stageTopY > stageBottomY)
+            {
+                stageMinY = stageBottomY;
+                stageMaxY = stageTopY;
+                stageBoundsActive = true;
+            }
+        }
+
+        /// <summary>레거시 호환 — 폭만 맞춤 (상·하 경계 클램프 없음).</summary>
+        public void FitToStageWidth(float worldWidth, float centerX = 0f)
+            => FitToStageBounds(worldWidth, centerX, 0f, 0f);
+
+        /// <summary>
+        /// ProCamera2D 추적 타깃 등록. BallController.OnEnable 등에서 호출.
+        /// 중복 등록은 ProCamera2D 내부에서 무시.
+        /// 기본 influenceH=0 → 좌우 추적 비활성(카메라 X 고정), 상하만 추적.
+        /// </summary>
+        public void RegisterFollow(Transform target, float influenceH = 0f, float influenceV = 1f)
+        {
+            if (target == null) return;
+            if (proCamera == null) proCamera = GetComponent<ProCamera2D>() ?? (targetCamera != null ? targetCamera.GetComponent<ProCamera2D>() : null);
+            if (proCamera == null) return;
+            // ProCamera2D 의 AddCameraTarget 은 중복 등록을 자체적으로 방지하지 않으므로 사전 검사
+            for (int i = 0; i < proCamera.CameraTargets.Count; i++)
+            {
+                if (proCamera.CameraTargets[i] != null && proCamera.CameraTargets[i].TargetTransform == target) return;
+            }
+            proCamera.AddCameraTarget(target, influenceH, influenceV);
+        }
+
+        public void UnregisterFollow(Transform target)
+        {
+            if (target == null || proCamera == null) return;
+            for (int i = proCamera.CameraTargets.Count - 1; i >= 0; i--)
+            {
+                if (proCamera.CameraTargets[i] != null && proCamera.CameraTargets[i].TargetTransform == target)
+                {
+                    proCamera.RemoveCameraTarget(target);
+                    break;
+                }
+            }
         }
 
         public void NotifyBallCount(int count)
@@ -109,6 +219,19 @@ namespace RPGPinball.Physics
             if (inBossFight == active) return;
             inBossFight = active;
             RecalculateTargetSize();
+        }
+
+        // ── 마일스톤 5 모디파이어 스텁 ────────────────────────
+        private float visionReductionPercent;
+        /// <summary>현재 시야 감소율(0~1). 모디파이어 dispatcher가 조회.</summary>
+        public float VisionReductionPercent => visionReductionPercent;
+
+        /// <summary>
+        /// 블리자드 모디파이어 등에서 호출. 마일스톤 5는 값 보관만 — 실제 화면 가장자리 어두워짐 셰이더는 마일스톤 8 인계.
+        /// </summary>
+        public void SetVisionReduction(float percent)
+        {
+            visionReductionPercent = Mathf.Clamp01(percent);
         }
 
         private void RecalculateTargetSize()

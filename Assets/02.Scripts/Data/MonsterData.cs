@@ -27,5 +27,20 @@ namespace RPGPinball.Data
         [Header("판정")]
         public KnockbackTier knockbackTier = KnockbackTier.None;
         public bool isBoss;
+
+        [Header("절차 생성 (마일스톤 5)")]
+        [Tooltip("테마(액트). None이면 공통 풀.")]
+        public ActId themeOwner = ActId.None;
+        [Tooltip("Small=물량 러시 / Medium=정예 소수 / Large=엘리트 호위 졸개에서 우선.")]
+        public MonsterSizeCategory sizeCategory = MonsterSizeCategory.Small;
+        [Tooltip("WaveSpawner가 인스턴스화할 프리팹. 없으면 빈 GameObject 폴백.")]
+        public UnityEngine.GameObject prefab;
+    }
+
+    public enum MonsterSizeCategory
+    {
+        Small,
+        Medium,
+        Large
     }
 }

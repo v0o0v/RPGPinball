@@ -21,12 +21,15 @@ namespace RPGPinball.Physics
         /// 소환 직후 FlipperController가 호출. 위치에 따라 좌/우 플리퍼로 결정되며
         /// 회전 시작각을 설정한다.
         /// </summary>
+        // 2026-05-14: 플리퍼 시각·콜라이더 크기 50% 확대 (사용자 요청). prefab 은 그대로 두고 런타임 scale 로 적용.
+        private const float SizeMultiplier = 1.5f;
+
         public void InitializeSwing(bool isLeftSide)
         {
             // 회전축은 부모 transform(=두꺼운 쪽 끝, 피벗). 자식 Sprite/콜라이더가 우측 offset.
-            // 좌우 거울 대칭: scale.x 반전 + 회전 각도 부호 반전 함께 적용
+            // 좌우 거울 대칭: scale.x 반전 + 회전 각도 부호 반전 함께 적용.
             float sign = isLeftSide ? 1f : -1f;
-            transform.localScale = new Vector3(sign, 1f, 1f);
+            transform.localScale = new Vector3(sign * SizeMultiplier, SizeMultiplier, 1f);
             swingStartAngle = Constants.FlipperSwingStartAngle * sign;
             swingEndAngle = Constants.FlipperSwingEndAngle * sign;
             transform.localRotation = Quaternion.Euler(0f, 0f, swingStartAngle);

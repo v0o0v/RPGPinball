@@ -4,7 +4,8 @@
     "references": [
         "Unity.InputSystem",
         "UniTask",
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "ProCamera2D.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

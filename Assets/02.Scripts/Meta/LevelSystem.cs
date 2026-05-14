@@ -178,6 +178,20 @@ namespace RPGPinball.Meta
             SaveToData();
         }
 
+        /// <summary>신비한 제단(이벤트 노드) — SP 보너스 임의 지급.</summary>
+        public void AwardBonusSP(int amount)
+        {
+            if (amount <= 0) return;
+            totalSP = SafeInt.Create(totalSP.Value + amount);
+            EventBus.Publish(new OnSkillPointGained
+            {
+                Delta = amount,
+                TotalSP = totalSP.Value,
+                Reason = "BonusEvent"
+            });
+            SaveToData();
+        }
+
         /// <summary>SP 사용 (SkillTreeManager에서 호출).</summary>
         public bool TryConsumeSP(int amount)
         {

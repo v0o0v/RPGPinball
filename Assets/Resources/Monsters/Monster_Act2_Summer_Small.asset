@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36814265b406abd4cae89e0931cecb31, type: 3}
+  m_Name: Monster_Act2_Summer_Small
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.MonsterData
+  id: 200
+  displayName: Monster_Act2_Summer_Small
+  level: 1
+  maxHp: 100
+  defense: 0
+  magicResist: 0
+  xpReward: 12
+  goldReward: 0
+  manaOnHit: 8
+  knockbackTier: 0
+  isBoss: 0
+  themeOwner: 2
+  sizeCategory: 0
+  prefab: {fileID: 1042318427823638525, guid: 400a2eaae18b4db4c92b14f4c7e0c177, type: 3}

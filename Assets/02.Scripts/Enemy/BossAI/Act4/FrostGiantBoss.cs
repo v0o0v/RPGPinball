@@ -39,16 +39,19 @@ namespace RPGPinball.Enemy.BossAI.Act4
                 EventBus.Publish(new OnFlipperSpawnBlocked { Duration = 1.5f, Area = area });
                 Vector3 center = new Vector3(side * 2.25f, 0f, 0f);
                 TelegraphRenderer.ShowCircle(center, 2.5f, 1.5f, new Color(0.6f, 0.8f, 1f, 0.5f));
-                // 영역 내 공 강제 낙사
+                // 영역 내 공 강제 reset + 시간 페널티 (데드존 제거 2026-05-13 — 낙사 대신 강제 reset 의미)
                 var hits = UnityEngine.Physics2D.OverlapBoxAll(center, new Vector2(4.5f, 6f), 0f);
+                bool anyHit = false;
                 foreach (var h in hits)
                 {
                     if (h.CompareTag(Constants.TagBall))
                     {
                         var ball = h.GetComponent<BallController>();
-                        if (ball != null) ball.OnDead();
+                        if (ball != null) { ball.ForceReset(); anyHit = true; }
                     }
                 }
+                if (anyHit)
+                    EventBus.Publish(new OnTimePenalty { Delta = Constants.BossForcedTimePenalty });
                 return UniTask.CompletedTask;
             }
         }

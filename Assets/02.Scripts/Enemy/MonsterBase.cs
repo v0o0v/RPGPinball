@@ -48,12 +48,25 @@ namespace RPGPinball.Enemy
         {
             if (data == null)
             {
-                Debug.LogError($"[MonsterBase] MonsterData가 비어있음: {name}", this);
+                // 마일스톤 5 WaveSpawner는 InjectData로 데이터를 주입하므로 단순 비활성만.
                 enabled = false;
                 return;
             }
             hp = SafeInt.Create(data.maxHp);
             gameObject.tag = data.isBoss ? Constants.TagBoss : Constants.TagMonster;
+        }
+
+        /// <summary>
+        /// 마일스톤 5: 런타임 데이터 주입 (WaveSpawner가 Act 배율·StageIndex 스케일링된 복제 SO로 호출).
+        /// </summary>
+        public virtual void InjectData(MonsterData newData)
+        {
+            if (newData == null) return;
+            data = newData;
+            hp = SafeInt.Create(data.maxHp);
+            gameObject.tag = data.isBoss ? Constants.TagBoss : Constants.TagMonster;
+            IsDead = false;
+            enabled = true;
         }
 
         protected virtual void Update()

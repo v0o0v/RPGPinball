@@ -23,7 +23,7 @@ namespace RPGPinball.Physics
         [SerializeField] private bool isSplitBall;
 
         private Rigidbody2D rb;
-        private bool isDead;
+        private bool isResetting;
         private float invincibleTimer;
         private float transformationRemaining;
 
@@ -71,6 +71,11 @@ namespace RPGPinball.Physics
             rb.linearDamping = Constants.BallLinearDrag;
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+            // 공이 항상 다른 모든 오브젝트 위에 그려지도록 sortingOrder 최상위 강제.
+            // 기믹 prefab=5, 세그먼트=-1 ~ 3 범위에서 100이면 충분히 위.
+            var sprites = GetComponentsInChildren<SpriteRenderer>(includeInactive: true);
+            foreach (var sr in sprites) sr.sortingOrder = 100;
         }
 
         private void OnEnable()
@@ -80,6 +85,22 @@ namespace RPGPinball.Physics
             {
                 CameraController.Instance.NotifyBallAdded(1);
             }
+            // 카메라 추적은 Start()에서 등록 — Awake 순서 보장 위해 (CameraController.Instance가 null일 수 있음).
+            TryRegisterCameraFollow();
+        }
+
+        private void Start()
+        {
+            // Awake 모두 끝난 후 호출되므로 CameraController.Instance가 보장됨.
+            TryRegisterCameraFollow();
+        }
+
+        private void TryRegisterCameraFollow()
+        {
+            if (CameraController.Instance == null) return;
+            // 좌·우 외벽이 화면 가장자리에 닿는 폭으로 카메라가 고정되므로 X 추적 0, Y만 추적.
+            float vInfluence = isSplitBall ? 0.5f : 1f;
+            CameraController.Instance.RegisterFollow(transform, 0f, vInfluence);
         }
 
         private void OnDisable()
@@ -88,11 +109,15 @@ namespace RPGPinball.Physics
             {
                 CameraController.Instance.NotifyBallRemoved(1);
             }
+            if (CameraController.Instance != null)
+            {
+                CameraController.Instance.UnregisterFollow(transform);
+            }
         }
 
         private void FixedUpdate()
         {
-            if (isDead) return;
+            if (isResetting) return;
             if (forcedSpeedActive)
             {
                 if (rb.linearVelocity.sqrMagnitude > 0.01f)
@@ -106,7 +131,8 @@ namespace RPGPinball.Physics
                 ApplyForcedSlowModifiers();
                 ApplyForcedSpeedMultiplierModifiers();
             }
-            CheckFallDead();
+            // 데드존 제거 (2026-05-13) — 외벽 닫힌 통으로 공이 절대 떨어지지 않음.
+            // CheckFallDead() 호출 제거. BallController.OnDead 는 보스 강제 reset 패턴용으로 유지.
         }
 
         private void ApplyForcedSlowModifiers()
@@ -144,16 +170,33 @@ namespace RPGPinball.Physics
 
         // ── 속도 클램핑 ───────────────────────────────────────
 
+        private float stuckSinceTime = -1f;
+        private const float StuckGraceSeconds = 0.5f;
+
         private void ClampSpeed()
         {
             var speed = rb.linearVelocity.magnitude;
             if (speed > Constants.BallMaxSpeed)
             {
                 rb.linearVelocity = rb.linearVelocity.normalized * Constants.BallMaxSpeed;
+                stuckSinceTime = -1f;
+                return;
             }
-            else if (speed < Constants.BallMinSpeed && speed > 0.01f)
+            // 자유낙하 정점에서 속도가 일시적으로 0에 가까워질 때 ClampSpeed가 위로 재가속하는 버그를 회피.
+            // 일정 시간 이상(0.5s) min 미만 상태가 유지될 때만 stuck으로 간주해 임펄스 강제.
+            if (speed < Constants.BallMinSpeed)
             {
-                rb.linearVelocity = rb.linearVelocity.normalized * Constants.BallMinSpeed;
+                if (stuckSinceTime < 0f) stuckSinceTime = Time.time;
+                else if (Time.time - stuckSinceTime > StuckGraceSeconds && speed < 0.3f)
+                {
+                    Vector2 dir = speed > 0.001f ? rb.linearVelocity.normalized : Vector2.down;
+                    rb.linearVelocity = dir * Constants.BallMinSpeed;
+                    stuckSinceTime = -1f;
+                }
+            }
+            else
+            {
+                stuckSinceTime = -1f;
             }
         }
 
@@ -202,23 +245,18 @@ namespace RPGPinball.Physics
             transformationRemaining = duration;
         }
 
-        // ── 낙사 감지 (DeadZone Trigger 보조용) ──────────────
+        // ── 강제 리셋 (보스 메커닉 전용) ──────────────────────
+        // 데드존 제거(2026-05-13) 이후 자연 낙사는 없음. ForceReset은 보스 강제 reset 패턴 전용.
 
-        private void CheckFallDead()
+        public void ForceReset()
         {
-            if (transform.position.y < respawnY)
-                OnDead();
-        }
-
-        public void OnDead()
-        {
-            if (isDead) return;
-            isDead = true;
+            if (isResetting) return;
+            isResetting = true;
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
             gameObject.SetActive(false);
 
-            EventBus.Publish(new OnBallDead { BallIndex = ballIndex });
+            EventBus.Publish(new OnBallReset { BallIndex = ballIndex });
 
             // 분열 공은 리스폰 없이 그대로 소멸
             if (isSplitBall)
@@ -238,10 +276,10 @@ namespace RPGPinball.Physics
             transform.position = spawnPos;
             rb.linearVelocity = Vector2.down * Constants.RespawnLaunchSpeed;
             gameObject.SetActive(true);
-            isDead = false;
+            isResetting = false;
             invincibleTimer = Constants.RespawnInvincibleTime;
 
-            EventBus.Publish(new OnBallRespawned { BallIndex = ballIndex });
+            EventBus.Publish(new OnBallSpawned { BallIndex = ballIndex });
         }
 
         // ── 충돌 이벤트 ───────────────────────────────────────
@@ -254,6 +292,20 @@ namespace RPGPinball.Physics
                 || tag == Constants.TagMonster || tag == Constants.TagBoss)
             {
                 lastCollisionTime = Time.time;
+            }
+
+            // 벽 충돌 직후 자동 반사 보장: PhysicsMaterial2D 반발만으로 부족한 경우
+            // (저각 슬라이딩 등) 충돌 법선 방향으로 최소 속도 임펄스 부여 → 공이 벽에 박혀
+            // 멈추거나 미끄러져 흐르는 현상을 방지.
+            if (tag == Constants.TagWall && col.contactCount > 0)
+            {
+                Vector2 normal = col.GetContact(0).normal;
+                float postSpeed = rb.linearVelocity.magnitude;
+                if (postSpeed < Constants.BallMinSpeed)
+                {
+                    rb.linearVelocity = normal * Constants.BallMinSpeed;
+                    stuckSinceTime = -1f;
+                }
             }
 
             EventBus.Publish(new OnBallHit

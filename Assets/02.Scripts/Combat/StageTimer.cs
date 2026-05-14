@@ -40,7 +40,7 @@ namespace RPGPinball.Combat
 
         private void OnEnable()
         {
-            EventBus.Subscribe<OnBallDead>(HandleBallDead);
+            // 데드존 제거(2026-05-13) — 자동 페널티 없음. 보스/탄막/기믹은 직접 OnTimePenalty/OnProjectilePenalty 발행.
             EventBus.Subscribe<OnProjectilePenalty>(HandleProjectilePenalty);
             EventBus.Subscribe<OnTimePenalty>(HandleTimePenalty);
             if (autoStart) StartTimer();
@@ -48,7 +48,6 @@ namespace RPGPinball.Combat
 
         private void OnDisable()
         {
-            EventBus.Unsubscribe<OnBallDead>(HandleBallDead);
             EventBus.Unsubscribe<OnProjectilePenalty>(HandleProjectilePenalty);
             EventBus.Unsubscribe<OnTimePenalty>(HandleTimePenalty);
             if (Instance == this) Instance = null;
@@ -109,12 +108,6 @@ namespace RPGPinball.Combat
         }
 
         // ── 이벤트 핸들러 ─────────────────────────────────────
-
-        private void HandleBallDead(OnBallDead _)
-        {
-            // DeadZone에서 이미 OnTimePenalty 발행하므로 여기서는 중복 방지.
-            // 보스전 -20초 분기는 마일스톤 4에서 추가.
-        }
 
         private void HandleProjectilePenalty(OnProjectilePenalty e) => Penalize(e.Delta);
 

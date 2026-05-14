@@ -6,7 +6,7 @@ namespace RPGPinball.Combat
     /// <summary>
     /// 현재 보스전 진행 여부를 글로벌하게 노출.
     /// BossBase가 OnEnable/Die에서 Enter/Exit 호출.
-    /// DeadZone, FlipperController 등이 분기 조건으로 참조.
+    /// (2026-05-13 데드존 제거로 DeadZone 분기는 사라지고, 카메라 보스전 줌·플리퍼 차단 등에서 사용.)
     /// </summary>
     public static class BossFightContext
     {

@@ -30,7 +30,7 @@ namespace RPGPinball.Core
         public const float FlipperThickness = 0.3f;
         public const float FlipperSpawnAnimTime = 0.08f;
         public const float FlipperActiveTime = 0.5f;
-        public const float FlipperSwingTime = 0.15f;
+        public const float FlipperSwingTime = 0.115f; // 2026-05-14: 0.15 → 0.115 (스윙 속도 30% 증가, 사용자 요청)
         public const float FlipperDespawnAnimTime = 0.12f;
         public const float FlipperCooldown = 1.5f;
         public const float FlipperCooldownMin = 0.5f;
@@ -59,8 +59,7 @@ namespace RPGPinball.Core
         // 탄막
         public const float ProjectileDefaultSpeed = 8.0f;
 
-        // 데드존 / 범퍼
-        public const float DeadzonePenalty = -10.0f;
+        // 범퍼 (데드존 페널티는 2026-05-13 제거 — 외벽 닫힌 통)
         public const float BumperImpulse = 18.0f;
 
         // 태그
@@ -98,7 +97,9 @@ namespace RPGPinball.Core
         public const float StageDefaultTime = 180f;
         public const float TimeRecoverCapPerStage = 60f;
         public const float ProjectilePenetratePenalty = -5f;
-        public const float BossDeadzonePenalty = -20f;
+        // BossDeadzonePenalty(-20f)는 데드존 제거로 2026-05-13 삭제.
+        // 보스가 직접 발행하는 강제 시간 페널티는 BossForcedTimePenalty 로 대체.
+        public const float BossForcedTimePenalty = -15f;
 
         // ── 스킬 ────────────────────────────────────────────────
         public const float SkillCastDelay = 0.3f;
@@ -184,5 +185,76 @@ namespace RPGPinball.Core
 
         // ── 태그 (마일스톤 4) ──────────────────────────────────
         public const string TagWeakPoint = "WeakPoint";
+
+        // ── 시드 (마일스톤 5) ──────────────────────────────────
+        public const int SeedSaltActKey = 17;
+        public const int SeedSaltStageKey = 53;
+        public const int SeedSaltRetryKey = 131;
+        public const int SeedSaltDailyKey = 2027;
+        public const int SeedKstOffsetHours = 9;
+
+        // ── 세그먼트 (마일스톤 5) ──────────────────────────────
+        // 2026-05-15: 9.0 → 13.0 — 핀볼판 비율(가로 넓힘) 참조 이미지 매칭. 격자 col 4점이 ±4.5/±1.5로 spread
+        // 2026-05-14: 13.0 → 16.9 — 가로 30% 추가 확장 (사용자 요청). 격자 col 4점이 ±6.45/±2.15로 spread, 외벽 ±8.45
+        public const float SegPlayfieldWidth = 16.9f;
+        public const float SegStageVerticalScreenCount = 3.0f;
+        public const float SegMiddleHeightDefault = 3.5f;
+        public const float SegHeightTolerance = 0.5f;
+        public const float SegTopHeightDefault = 4.0f;
+        public const float SegBottomHeightDefault = 6.0f;
+
+        // ── 절차 생성 (마일스톤 5) ──────────────────────────────
+        public const float ProcMutationChance = 0.05f;
+        public const float ProcThemeRatioMin = 0.4f;
+        public const int ProcRewardOrBuffMin = 1;
+        public const int ProcTrialOverloadThreshold = 3;
+        public const float ProcBudgetVarianceMin = -0.1f;
+        public const float ProcBudgetVarianceMax = 0.1f;
+        public const int ProcBudgetBase = 800;     // 2026-05-14: 100→240→800, 화면 50% 충진 + 좌우 대칭 페어 배치 보장
+        public const int ProcBudgetPerStage = 60;  // 2026-05-14: 20→30→60
+
+        // ── 기믹 가중치 (마일스톤 5) ───────────────────────────
+        public const float GimmickDuplicateWeightDecay = 0.5f;
+        public const float GimmickThemeWeightBonus = 2.0f;
+        public const float GimmickSynergyWeightBonus = 1.5f;
+
+        // ── 웨이브 (마일스톤 5) ────────────────────────────────
+        public const int WaveCountBase = 1;
+        public const int WaveCountPer5Stages = 1;
+        public const int WaveCountMax = 7;
+        public const float EliteSpawnRatePerStage = 0.05f;
+        public const float EliteSpawnRateMax = 0.5f;
+        public const int MassRushMinCount = 8;
+        public const int MassRushMaxCount = 12;
+        public const int EliteMinorityMinCount = 3;
+        public const int EliteMinorityMaxCount = 5;
+        public const int BossEscortMinCount = 4;
+        public const int BossEscortMaxCount = 6;
+
+        // ── 모디파이어 (마일스톤 5) ────────────────────────────
+        public const float ModifierProbDevelopment = 0.5f;
+        public const float ModifierProbClimaxExtra = 0.3f;
+
+        // ── 휴식 / 이벤트 (마일스톤 5) ─────────────────────────
+        public const float RestNodeBonusTime = 20f;
+        public const float MysticAltarTimeCost = 30f;
+        public const int MysticAltarSpReward = 1;
+        public const float EventRestRatio = 0.7f;
+
+        // ── 돌연변이 (마일스톤 5) ──────────────────────────────
+        public const float MutationGoldMultiplier = 2.0f;
+        public const float MutationRareRuneDelta = 0.15f;
+        public const float MutationMiniaturePlayfieldScale = 0.6f;
+        public const float MutationBossRushHpRatio = 0.5f;
+        public const float MutationTimeRushTimeLimit = 60f;
+
+        // ── 노드 유형 목표 비율 (30개 노드 중) ─────────────────
+        public const float NodeRatioNormal = 0.7f;
+        public const float NodeRatioElite = 0.1f;
+        public const float NodeRatioEvent = 0.1f;
+        public const float NodeRatioRest = 0.05f;
+        public const float NodeRatioHidden = 0.05f;
+        public const float HiddenNodeBaseChance = 0.05f;
+        public const float EliteConvertChance = 0.10f;
     }
 }

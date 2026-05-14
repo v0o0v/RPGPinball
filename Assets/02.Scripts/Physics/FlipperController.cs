@@ -17,9 +17,8 @@ namespace RPGPinball.Physics
         [SerializeField] private GameObject flipperPrefab;
         [SerializeField] private InputActionAsset inputActions;
 
-        [Header("소환 제한 영역")]
-        [SerializeField] private float bossZoneMinY = 4f;
-        [SerializeField] private float deadZoneMaxY = -5f;
+        // 정적 소환 제한 영역은 데드존 제거(2026-05-13) 이후 폐기.
+        // 보스 영역 차단은 OnFlipperSpawnBlocked 이벤트(areaBlocks)로 동적 관리.
 
         private InputAction touchPressAction;
         private InputAction touchPositionAction;
@@ -93,7 +92,6 @@ namespace RPGPinball.Physics
                 if (areaBlocks[i].area.Contains(spawnPos)) return;
             }
 
-            if (!IsSpawnAllowed(spawnPos)) return;
             if (IsTooCloseToExisting(spawnPos)) return;
 
             SpawnFlipper(spawnPos);
@@ -124,13 +122,31 @@ namespace RPGPinball.Physics
         {
             var go = Instantiate(flipperPrefab, pos, Quaternion.identity);
 
-            // 화면 중심 기준 좌/우 결정 → 스윙 방향 자동 세팅
+            // 공의 위치 기준 좌/우 결정: 공의 왼쪽 터치 → 왼쪽 플리퍼(반시계 스윙), 오른쪽 터치 → 오른쪽 플리퍼(시계 스윙).
+            // 멀티볼이면 가장 가까운 공 기준. 공이 없으면 화면 중심 fallback.
             var flipper = go.GetComponent<Flipper>();
-            if (flipper != null) flipper.InitializeSwing(pos.x < 0f);
+            if (flipper != null) flipper.InitializeSwing(IsLeftOfNearestBall(pos));
 
             active.Add(new FlipperInstance(go));
             cooldown = ComputeCooldown();
             EventBus.Publish(new OnFlipperSpawned { Position = pos });
+        }
+
+        private static bool IsLeftOfNearestBall(Vector2 spawnPos)
+        {
+            var balls = FindObjectsByType<BallController>(FindObjectsSortMode.None);
+            if (balls == null || balls.Length == 0) return spawnPos.x < 0f;
+
+            float bestSqr = float.MaxValue;
+            float bestBallX = 0f;
+            for (int i = 0; i < balls.Length; i++)
+            {
+                if (balls[i] == null) continue;
+                var bp = (Vector2)balls[i].transform.position;
+                float sqr = (bp - spawnPos).sqrMagnitude;
+                if (sqr < bestSqr) { bestSqr = sqr; bestBallX = bp.x; }
+            }
+            return spawnPos.x < bestBallX;
         }
 
         private float ComputeCooldown()
@@ -157,13 +173,8 @@ namespace RPGPinball.Physics
         public void SetUnlimitedStack(bool active) { unlimitedStack = active; }
 
         // ── 소환 가능 여부 ─────────────────────────────────────
-
-        private bool IsSpawnAllowed(Vector2 pos)
-        {
-            if (pos.y >= bossZoneMinY) return false;
-            if (pos.y <= deadZoneMaxY) return false;
-            return true;
-        }
+        // 데드존 제거(2026-05-13) 이후 정적 Y 제약 폐기. 보스 영역 차단은
+        // OnFlipperSpawnBlocked → areaBlocks 로 동적 관리(OnTouchPerformed 에서 검사).
 
         private bool IsTooCloseToExisting(Vector2 pos)
         {

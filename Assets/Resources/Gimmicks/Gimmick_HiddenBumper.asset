@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73214f172bb465748801b3499960279e, type: 3}
+  m_Name: Gimmick_HiddenBumper
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.GimmickData
+  gimmickId: 1
+  displayNameKo: "\uD788\uB4E0 \uBC94\uD37C"
+  category: 3
+  placement: 2
+  themeOwner: 0
+  size: {x: 0.5, y: 0.5}
+  isCircularShape: 1
+  triggerKind: 0
+  triggerIntervalSeconds: 0
+  triggerOnceOnly: 1
+  damagePercent: 0
+  absoluteHpDamage: 0
+  impulseN: 20
+  timePenaltySeconds: 0
+  manaDelta: 15
+  goldDelta: 30
+  xpDelta: 50
+  buffDurationSeconds: 0
+  debuffDurationSeconds: 0
+  cooldownSeconds: 0
+  isBlockable: 0
+  respectsResistance: 0
+  budgetCost: -10
+  bossOnly: 0
+  conflictingIds: 
+  synergyIds: 
+  prefab: {fileID: 5946104529894897329, guid: 3c07c5ab3da337e45a5eff1816f33a9a, type: 3}
+  descriptionKo: 

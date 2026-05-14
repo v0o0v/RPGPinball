@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6641a06c80bbe47ac86a43c18bd9d2, type: 3}
+  m_Name: Modifier_EternalFrost
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.StageModifierData
+  modifierId: 8
+  displayNameKo: "\uC601\uAC81\uC758 \uC11C\uB9AC"
+  themeOwner: 0
+  tier: 4
+  timeLimitDeltaSeconds: 0
+  deadzonePenaltyMultiplier: 1
+  monsterHpMultiplier: 1
+  monsterDefMultiplier: 1
+  eliteSpawnMultiplier: 1
+  ballBaseSpeedMultiplier: 1
+  flipperCooldownDelta: 0
+  flipperFailChance: 0
+  gravityChaosIntervalSeconds: 0
+  vegetationGrowthEnabled: 0
+  tideCycleSeconds: 0
+  rampGimmickToggleEnabled: 0
+  phaseShiftIntervalSeconds: 0
+  visionReductionPercent: 0
+  timeWarpEnabled: 0
+  goldDropMultiplier: 1
+  criticalChanceDelta: 0
+  ballFreezeTriggerSeconds: 2
+  gimbalRandomBuffChance: 0
+  manaChargeMultiplier: 1
+  skillDamageDelta: 0
+  skillCostMultiplier: 1
+  goldRewardDelta: 0
+  xpRewardDelta: 0
+  runeDropChanceDelta: 0
+  manaCrystalDelta: 0
+  tarotShardDelta: 0
+  coreShardChanceDelta: 0.1
+  spRewardDelta: 0
+  comboBonusDelta: 0
+  descriptionKo: 

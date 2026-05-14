@@ -63,17 +63,21 @@ namespace RPGPinball.Enemy.BossAI.Act4
             if (CurrentPhase == BossPhase.P2 && !AbsoluteZeroFieldActive) AbsoluteZeroFieldActive = true;
             if (CurrentPhase == BossPhase.P1 && AbsoluteZeroFieldActive) AbsoluteZeroFieldActive = false;
 
-            // 절대 영도 - 모든 공 검사
+            // 절대 영도 - 모든 공 검사 (데드존 제거 2026-05-13 — 강제 reset + 시간 페널티)
             if (AbsoluteZeroFieldActive)
             {
+                bool anyFrozen = false;
                 foreach (var ball in Object.FindObjectsByType<BallController>(FindObjectsSortMode.None))
                 {
                     if (ball == null) continue;
                     if (Time.time - ball.LastCollisionTime > absoluteZeroNoCollisionSeconds)
                     {
-                        ball.OnDead();
+                        ball.ForceReset();
+                        anyFrozen = true;
                     }
                 }
+                if (anyFrozen)
+                    EventBus.Publish(new OnTimePenalty { Delta = Constants.BossForcedTimePenalty });
             }
 
             // Phase 3: 시간 정지 자동 발동

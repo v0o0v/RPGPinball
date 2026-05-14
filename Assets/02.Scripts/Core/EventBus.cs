@@ -68,12 +68,17 @@ namespace RPGPinball.Core
         public float Delta;
     }
 
-    public struct OnBallDead
+    /// <summary>
+    /// 공이 강제 리셋되어 일시 비활성화됨. 보스 강제 reset 패턴(빙결 거인 등)에서 발행.
+    /// 데드존 제거(2026-05-13) 이후 자연 낙사는 없으며, 이 이벤트는 명시적 보스 메커닉 전용.
+    /// </summary>
+    public struct OnBallReset
     {
         public int BallIndex;
     }
 
-    public struct OnBallRespawned
+    /// <summary>리셋 후 공이 재배치되어 다시 활성화됨.</summary>
+    public struct OnBallSpawned
     {
         public int BallIndex;
     }
@@ -234,5 +239,53 @@ namespace RPGPinball.Core
     {
         public float BallSpeedMultiplier;
         public float Duration;
+    }
+
+    // ── 마일스톤 5 이벤트 (Stage / Generation) ─────────────────
+
+    public struct OnStageGenerated
+    {
+        public Data.ActId ActId;
+        public int StageIndex;
+        public ulong Seed;
+        public Data.NodeKind NodeKind;
+        public Data.MutationId MutationId;
+    }
+
+    public struct OnStageStart
+    {
+        public Data.ActId ActId;
+        public int StageIndex;
+    }
+
+    public struct OnStageClear
+    {
+        public Data.ActId ActId;
+        public int StageIndex;
+        public string Grade; // "S"/"A"/"B"/"C" (M8 GradeSystem 도입 시 enum화)
+        public float ClearTimeSeconds;
+    }
+
+    public struct OnNodeEntered
+    {
+        public Data.NodeKind NodeKind;
+        public int StageIndex;
+    }
+
+    public struct OnModifierApplied
+    {
+        public Data.ModifierId[] ModifierIds;
+    }
+
+    public struct OnMutationTriggered
+    {
+        public Data.MutationId MutationId;
+    }
+
+    /// <summary>휴식 노드 등 상한 외 시간 누적용. StageTimer 가 분기 구독.</summary>
+    public struct OnTimeBonusAdded
+    {
+        public float Seconds;
+        public string Source; // "RestNode" / "Gimmick" 등
     }
 }

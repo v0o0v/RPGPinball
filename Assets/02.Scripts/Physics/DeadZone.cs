@@ -1,34 +1,15 @@
 using UnityEngine;
-using RPGPinball.Combat;
-using RPGPinball.Core;
 
 namespace RPGPinball.Physics
 {
     /// <summary>
-    /// 낙사 판정 트리거. 공이 진입하면 시간 페널티 이벤트를 발행하고 BallController에 낙사 통보.
-    /// 마일스톤 4: BossFightContext.IsActive면 보스전 페널티(-20초) 적용.
+    /// [DEPRECATED 2026-05-13] 데드존 개념 제거. 스테이지 외벽이 닫힌 통이므로 공은 절대 떨어지지 않음.
+    /// 빈 컴포넌트로 남겨두어 기존 씬·프리팹의 참조 깨짐을 방지. 신규 씬에는 부착하지 말 것.
+    /// 트리거 동작이 필요하면 BossFightContext / 보스 패턴에서 EventBus.OnTimePenalty 를 직접 발행.
     /// </summary>
-    [RequireComponent(typeof(BoxCollider2D))]
+    [System.Obsolete("DeadZone 개념은 마일스톤 5에서 제거됨. 외벽 닫힌 통으로 대체.")]
     public class DeadZone : MonoBehaviour
     {
-        private void Awake()
-        {
-            GetComponent<BoxCollider2D>().isTrigger = true;
-        }
-
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            if (!col.CompareTag(Constants.TagBall)) return;
-
-            // 보스전 진행 시 -20초, 평시 -10초
-            float penalty = BossFightContext.IsActive
-                ? Constants.BossDeadzonePenalty
-                : Constants.DeadzonePenalty;
-            EventBus.Publish(new OnTimePenalty { Delta = penalty });
-
-            // 공에 낙사 처리 위임
-            var ball = col.GetComponent<BallController>();
-            ball?.OnDead();
-        }
+        // 의도적으로 동작 없음. 씬 호환성 유지용 placeholder.
     }
 }

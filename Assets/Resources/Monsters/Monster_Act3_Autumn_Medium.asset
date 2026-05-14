@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36814265b406abd4cae89e0931cecb31, type: 3}
+  m_Name: Monster_Act3_Autumn_Medium
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.MonsterData
+  id: 301
+  displayName: Monster_Act3_Autumn_Medium
+  level: 1
+  maxHp: 200
+  defense: 0
+  magicResist: 0
+  xpReward: 24
+  goldReward: 0
+  manaOnHit: 8
+  knockbackTier: 0
+  isBoss: 0
+  themeOwner: 3
+  sizeCategory: 1
+  prefab: {fileID: 603011318380988079, guid: c1d47636bbc25dd47ae7b6fc774aa804, type: 3}

@@ -30,12 +30,12 @@ namespace RPGPinball.Combat
 
         private void OnEnable()
         {
-            EventBus.Subscribe<OnBallDead>(HandleBallDead);
+            // 데드존 제거(2026-05-13) — 자연 낙사 없음. 콤보 리셋은 3초 무타격 타이머가 담당.
+            // 보스 강제 reset 등에서 콤보를 끊고 싶으면 ComboSystem.Instance.ResetCombo()를 직접 호출.
         }
 
         private void OnDisable()
         {
-            EventBus.Unsubscribe<OnBallDead>(HandleBallDead);
             if (Instance == this) Instance = null;
         }
 
@@ -74,6 +74,5 @@ namespace RPGPinball.Combat
                 EventBus.Publish(new OnComboChange { Combo = newValue });
         }
 
-        private void HandleBallDead(OnBallDead _) => ResetCombo();
     }
 }

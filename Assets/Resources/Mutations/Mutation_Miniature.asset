@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16da092a72513f34a9f886486fafdc29, type: 3}
+  m_Name: Mutation_Miniature
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.MutationData
+  mutationId: 3
+  displayNameKo: "\uBBF8\uB2C8\uC5B4\uCC98"
+  allowPrologue: 0
+  allowDevelopment: 0
+  allowClimax: 1
+  crossThemeGimmickCount: 0
+  crossThemeSourceActs: 
+  mirrorLayoutHorizontal: 0
+  playfieldScaleMultiplier: 0.6
+  wallElasticityMultiplier: 1.2
+  forceTimeLimit: 0
+  forcedTimeLimitSeconds: 60
+  trMonsterHpMultiplier: 1
+  trRewardMultiplier: 1
+  recurringBossHpRatio: 0.5
+  bossPoolForAct: 
+  goldMultiplier: 2
+  rareRuneChanceDelta: 0.15
+  iconKind: "\u26A0\uFE0F"
+  descriptionKo: 

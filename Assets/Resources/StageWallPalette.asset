@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b1b78f55729814bba24f85ebb51ea3, type: 3}
+  m_Name: StageWallPalette
+  m_EditorClassIdentifier: RPGPinball.Runtime::RPGPinball.Data.StageWallPalette
+  common: {fileID: -6360694286058892901, guid: cdf428d6c925538429d3f5a3c50bd208, type: 3}
+  spring: {fileID: -5319950166406412858, guid: 653a81bee98bfe74daddf3be4ce48733, type: 3}
+  summer: {fileID: 5957631949388408201, guid: 6449f998946edac448f81981fca097b5, type: 3}
+  autumn: {fileID: -6756753684220418508, guid: cb53a871cfe89634794dfda169dfd9cc, type: 3}
+  winter: {fileID: -882588439859009853, guid: a838722fb3342c7498feefd1ff8b605e, type: 3}

@@ -399,7 +399,7 @@ resistLevel은 deathCount 기반 자동 계산:
 | remainingTimeSec | float | 남은 제한 시간 (180초 기본, 이어하기 시 +30초) |
 | timeRecoveredThisStage | float | 이번 스테이지에서 회복한 누적 시간. 60초 상한 체크용 |
 | manaGauge | int (0~100) | 현재 마나 게이지. 100 고정 최대치 |
-| comboCount | int | 현재 콤보 (3초 내 미타격 시 0, 낙사 시 0 — M-04 무한의 고리 장착 시 낙사 콤보 유지) |
+| comboCount | int | 현재 콤보 (3초 내 미타격 시 0 — _2026-05-13 데드존 제거로 자연 낙사 콤보 리셋 없음._ 보스 강제 reset 등에서 끊고 싶으면 `ComboSystem.ResetCombo()` 직접 호출. M-04 무한의 고리 장착 시 강제 reset에서도 콤보 유지) |
 | ballState.currentMaterial | enum: `"wood"` / `"steel"` / `"mithril"` / `"volcanic"` | 현재 장착된 공 재질 (스테이지 중 변경 불가, 마을에서만 교체) |
 | **ballState.activeTransformation** | enum: `null` / `"fireball"` / `"iceball"` / `"thunderball"` / `"giantball"` 등 | **A전환 스킬(파이어볼/아이스 폼/썬더볼/자이언트 볼 등)에 의한 일시적 공 변신 상태**. 재질 변신이 아닌 **속성·형태 오버레이**. 지속시간 만료 시 null로 복귀, 변신 중에도 currentMaterial은 유지(데미지 계산은 두 값 모두 적용). _(스킬 목록은 `Active_Skill_Judgment.md` 참조)_ |
 | ballState.transformRemainingTime | float | activeTransformation 남은 지속시간 (초). null일 때 0 |
