@@ -99,6 +99,16 @@ namespace RPGPinball.Combat
             totalRecovered = SafeFloat.Create(totalRecovered.Value + allowed);
         }
 
+        /// <summary>이어하기 보너스. 상한과 무관하게 30초 부여 + 타이머 재가동.</summary>
+        public void ContinueRestoreTime(float seconds)
+        {
+            if (seconds <= 0f) return;
+            remaining = SafeFloat.Create(remaining.Value + seconds);
+            running = true;
+            gameOverFired = false;
+            EventBus.Publish(new OnTimerChanged { Remaining = remaining.Value, Total = total });
+        }
+
         /// <summary>시간 페널티. seconds는 양수로 받아 음수 차감 처리.</summary>
         public void Penalize(float seconds)
         {

@@ -72,6 +72,20 @@ namespace RPGPinball.Combat
             combo = SafeInt.Create(newValue);
             if (prev != newValue)
                 EventBus.Publish(new OnComboChange { Combo = newValue });
+
+            // M7 #9 인계: 콤보 마일스톤 (10/30/50/100)
+            if (newValue > prev) PublishMilestoneIfCrossed(prev, newValue);
+        }
+
+        private static void PublishMilestoneIfCrossed(int prev, int next)
+        {
+            int[] milestones = { Constants.ComboMilestone10, Constants.ComboMilestone30,
+                                 Constants.ComboMilestone50, Constants.ComboMilestone100 };
+            foreach (var m in milestones)
+            {
+                if (prev < m && next >= m)
+                    EventBus.Publish(new OnComboMilestone { Milestone = m });
+            }
         }
 
     }

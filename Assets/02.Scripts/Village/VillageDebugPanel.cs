@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 using RPGPinball.Core;
 using RPGPinball.Data;
 using RPGPinball.Meta;
@@ -92,6 +93,16 @@ namespace RPGPinball.Village
                     econ.Add(CurrencyId.ManaCrystal, 50, "Debug");
                     econ.Add(CurrencyId.BossSoul, 5, "Debug");
                 }
+            }
+            GUILayout.EndArea();
+
+            // ── 화면 우상단: ActMap 진입 (출항) 글로벌 버튼 ──
+            const int btnW = 360, btnH = 140;
+            GUILayout.BeginArea(new Rect(Screen.width - btnW - 20, 20, btnW, btnH), GUI.skin.box);
+            if (GUILayout.Button("🎈 출항 (ActMap)", GUILayout.ExpandHeight(true)))
+            {
+                Log("출항 → ActMap 씬 전환");
+                if (GameManager.Instance != null) GameManager.Instance.LoadActMap().Forget();
             }
             GUILayout.EndArea();
         }
@@ -192,6 +203,11 @@ namespace RPGPinball.Village
             var b = BalloonManager.Instance;
             if (b == null) { GUILayout.Label("BalloonManager 미초기화"); return; }
             GUILayout.Label($"열기구 Lv.{b.CurrentUpgradeLevel} / 시작 마나 +{b.StartingManaBonus}");
+            if (GUILayout.Button("🎈 출항 (ActMap 진입)"))
+            {
+                Log("열기구 출항 → ActMap 씬 전환");
+                if (GameManager.Instance != null) GameManager.Instance.LoadActMap().Forget();
+            }
             if (GUILayout.Button("열기구 다음 단계 개조"))
             {
                 bool ok = b.Upgrade();

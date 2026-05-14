@@ -382,5 +382,74 @@ namespace RPGPinball.Core
         public static readonly Color TarotFrameColorRare = new Color(0.29f, 0.56f, 0.89f, 1f);     // #4A90E2
         public static readonly Color TarotFrameColorLegendary = new Color(0.61f, 0.35f, 0.71f, 1f); // #9B59B6
         public static readonly Color TarotFrameColorMythic = new Color(0.95f, 0.77f, 0.25f, 1f);   // #F1C40F
+
+        // ─────────────────────────────────────────────────────────
+        // 마일스톤 7: UI/UX & 세이브/로드
+        // ─────────────────────────────────────────────────────────
+
+        // ── §UI ────────────────────────────────────────────────
+        public const float UIPopupFadeInSec = 0.25f;
+        public const float UIPopupFadeOutSec = 0.20f;
+        public const float UIAlertAutoCloseSec = 3.0f;
+        public const float UIComboMilestonePunchScale = 1.2f;
+        public const float UIComboMilestonePunchSec = 0.3f;
+        public const int UISafeAreaTopPx = 60;
+        public const int UISafeAreaBottomPx = 200;
+        // Stage 씬: 메인 카메라가 비울 하단 HUD 영역 (마나바 + 스킬슬롯) 픽셀
+        // 1920 기준 0~320px = BottomBar 전체. 카메라 viewport.y 를 이 값으로 올려 핀볼판이 HUD 위에 그려지지 않게 함.
+        public const int StageCameraBottomHudPx = 320;
+        // 콤보 마일스톤 임계값
+        public const int ComboMilestone10 = 10;
+        public const int ComboMilestone30 = 30;
+        public const int ComboMilestone50 = 50;
+        public const int ComboMilestone100 = 100;
+
+        // ── §Scene ─────────────────────────────────────────────
+        public const string SceneNameTitle = "Title";
+        public const string SceneNameVillage = "Village";
+        public const string SceneNameActMap = "ActMap";
+        public const string SceneNameStage = "Stage";
+        public const string SceneNameResult = "Result";
+        public const float SceneFadeInSec = 0.3f;
+        public const float SceneFadeOutSec = 0.3f;
+
+        // ── §Save ──────────────────────────────────────────────
+        public const string SaveVersion = "2.0.0";
+        public const string SaveFileName = "save.dat";
+        public const string SaltFileName = "salt.bin";
+        public const string RuntimeSnapshotFileName = "runtime.snapshot";
+        public const float SaveAutoIntervalSec = 5.0f;
+        public const float CloudSyncTimeoutSec = 10.0f;
+        public const int SaveSaltLength = 32;
+        // 디버그/에디터 솔트 (런타임 배포에서는 RuntimeSaltProvider 가 파일에서 로드)
+        public const string SaveDebugSaltVersion = "debug_v1";
+
+        // ── §Pause ─────────────────────────────────────────────
+        public const bool PauseAllowBackgroundAutoSave = true;
+
+        // ── §Continue ──────────────────────────────────────────
+        public const float ContinueTimeBonusSec = 30.0f;
+        public const int ContinueDailyLimit = 3;
+        public const int ContinueManaRestore = 100;
+        public const string ContinueGradeClamp = "C";
+
+        // ── §Camera (Resolution_Spec.md §3.1) ──────────────────
+        public const float CameraTitleOrtho = 5.625f;
+        public const float CameraResultOrtho = 5.625f;
+        public const float CameraVillageOrtho = 10.0f;
+        public const float CameraActMapOrtho = 10.0f;
+        // Stage 동적 베이스. FitToStageBounds 미적용 시 fallback.
+        public const float CameraStageOrthoBase = 15.02f;
+
+        // ── §Kenney 추가 자산 (M7) ─────────────────────────────
+        public const string KennyPixelUIPackRoot = "Assets/50. External Assets/kenny/kenney_pixel-ui-pack";
+        public const string KennyMapPackRoot = "Assets/50. External Assets/kenny/kenney_map-pack";
+
+        // ── §ActMap 그리드 ──────────────────────────────────────
+        public const int ActMapNodeColumns = 5;
+        public const int ActMapNodeRows = 6;
+        public const float ActMapNodeColSpacing = 2.25f;  // X 간격 (±4.5 / ±2.25 / 0)
+        public const float ActMapNodeRowSpacing = 3.0f;   // Y 간격 (-9 ~ +9)
+        public const float ActMapNodeBaseY = -9.0f;
     }
 }

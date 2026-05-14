@@ -32,6 +32,10 @@ namespace RPGPinball.Physics
         private float fullBlockedUntil;
         private readonly List<(Rect area, float endTime)> areaBlocks = new();
 
+        // ── 마일스톤 7: UI 입력 충돌 차단 (SkillDeck 표적 지정 등) ─────
+        /// <summary>true 면 터치 입력으로 인한 플리퍼 소환 무시. SkillDeckInputController 가 토글.</summary>
+        public static bool InputBlocked { get; set; }
+
         private void Awake()
         {
             var map = inputActions.FindActionMap("Pinball", throwIfNotFound: true);
@@ -77,6 +81,8 @@ namespace RPGPinball.Physics
             if (GameManager.Instance != null && GameManager.Instance.State != GameState.Playing)
                 return;
             if (cooldown > 0f) return;
+            // M7: UI 입력 차단 (SkillDeck 표적 지정 / 일시정지 등)
+            if (InputBlocked) return;
 
             // 전체 차단
             if (Time.time < fullBlockedUntil) return;

@@ -452,4 +452,93 @@ namespace RPGPinball.Core
     {
         public Data.GimmickId? Cause;
     }
+
+    // ── 마일스톤 7 이벤트 (UI / Scene / Save / Pause / Continue) ─────────
+
+    /// <summary>씬 로드 시작. UI 페이드 아웃 트리거.</summary>
+    public struct OnSceneLoadStart
+    {
+        public string SceneName;
+    }
+
+    /// <summary>씬 로드 완료. UI 페이드 인 트리거.</summary>
+    public struct OnSceneLoadComplete
+    {
+        public string SceneName;
+    }
+
+    /// <summary>OnApplicationPause(true) 시 발행.</summary>
+    public struct OnApplicationPaused
+    {
+        public string Reason; // "UserRequest" / "ApplicationBackground" / ...
+    }
+
+    /// <summary>OnApplicationPause(false) 복귀 시 발행.</summary>
+    public struct OnApplicationResumed
+    {
+        public float ElapsedSecondsBackground;
+    }
+
+    /// <summary>이어하기 요청. ContinueAdPopup 트리거.</summary>
+    public struct OnContinueRequested { }
+
+    /// <summary>이어하기 승인 후 재개 직전.</summary>
+    public struct OnContinueGranted
+    {
+        public float RestoredSeconds;
+        public int RestoredMana;
+        public int ContinueCount;
+    }
+
+    public struct OnSaveStarted { }
+    public struct OnSaveCompleted
+    {
+        public bool Success;
+    }
+    public struct OnSaveFailed
+    {
+        public string ErrorReason;
+    }
+
+    public struct OnLoadStarted { }
+    public struct OnLoadCompleted
+    {
+        public bool Success;
+        public string ErrorReason;
+    }
+
+    public struct OnCloudSyncStarted { }
+    public struct OnCloudSyncCompleted
+    {
+        public bool Success;
+        public string ErrorReason;
+    }
+
+    public struct OnPopupOpened
+    {
+        public string PopupId;
+    }
+    public struct OnPopupClosed
+    {
+        public string PopupId;
+    }
+
+    /// <summary>콤보 마일스톤 도달(10/30/50/100). M2 #9 인계.</summary>
+    public struct OnComboMilestone
+    {
+        public int Milestone;
+    }
+
+    /// <summary>스킬 슬롯 선택 (표적 지정 대기 진입).</summary>
+    public struct OnSkillSlotSelected
+    {
+        public int SlotIndex;
+        public bool RequiresTarget;
+    }
+
+    /// <summary>스킬 슬롯 취소.</summary>
+    public struct OnSkillSlotCancelled
+    {
+        public int SlotIndex;
+    }
 }

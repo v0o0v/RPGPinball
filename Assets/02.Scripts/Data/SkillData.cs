@@ -62,6 +62,9 @@ namespace RPGPinball.Data
         [Header("툴팁")]
         [TextArea(3, 6)] public string descriptionKo;
 
+        [Header("UI")]
+        public Sprite icon;
+
         // ── 헬퍼 ────────────────────────────────────────────
         public bool IsPassive => type == SkillType.Passive;
         public bool IsActiveSwitch => type == SkillType.ActiveSwitch;

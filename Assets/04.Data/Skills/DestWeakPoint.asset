@@ -44,3 +44,4 @@ MonoBehaviour:
   durationBase: 0
   durationPerLevel: 0
   descriptionKo: 
+  icon: {fileID: 7096712139455410985, guid: 3029e45c9f38f5b4182ca6c6a589ee0e, type: 3}

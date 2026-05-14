@@ -57,6 +57,19 @@ namespace RPGPinball.Physics
 
             proCamera = GetComponent<ProCamera2D>();
             if (proCamera == null && targetCamera != null) proCamera = targetCamera.GetComponent<ProCamera2D>();
+
+            ApplyStageHudSafeArea();
+        }
+
+        /// <summary>
+        /// 메인 카메라의 viewport rect 를 하단 HUD(마나바+스킬슬롯) 위로 올려 핀볼판이 HUD 와 겹치지 않게 함.
+        /// 비율은 1080×1920 기준. 다른 해상도는 normalized 라 자동 적용됨.
+        /// </summary>
+        private void ApplyStageHudSafeArea()
+        {
+            if (targetCamera == null) return;
+            float bottom = (float)Constants.StageCameraBottomHudPx / Constants.UIReferenceHeight;
+            targetCamera.rect = new Rect(0f, bottom, 1f, 1f - bottom);
         }
 
         private void OnEnable()
